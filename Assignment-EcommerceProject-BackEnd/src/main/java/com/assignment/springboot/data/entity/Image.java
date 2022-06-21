@@ -3,31 +3,31 @@ package com.assignment.springboot.data.entity;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+
 @EqualsAndHashCode
 @Entity
-@Table(name = "ratings")
-public class Rating {
+@Table(name = "images")
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "vote_star")
-    private int voteStar;
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private byte[] file;
+    @Column(name = "file_type")
+    private String fileType;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public Rating(int id, int voteStar, Customer customer, Product product) {
+    public Image(int id, byte[] file, String fileType, Product product) {
         this.id = id;
-        this.voteStar = voteStar;
-        this.customer = customer;
+        this.file = file;
+        this.fileType = fileType;
         this.product = product;
     }
-    public Rating(){
+    public Image(){
 
     }
+
     public int getId() {
         return id;
     }
@@ -36,20 +36,20 @@ public class Rating {
         this.id = id;
     }
 
-    public int getVoteStar() {
-        return voteStar;
+    public byte[] getFile() {
+        return file;
     }
 
-    public void setVoteStar(int voteStar) {
-        this.voteStar = voteStar;
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getFileType() {
+        return fileType;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
     public Product getProduct() {

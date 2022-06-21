@@ -1,7 +1,12 @@
 package com.assignment.springboot.data.entity;
 
-import javax.persistence.*;
+import lombok.EqualsAndHashCode;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@EqualsAndHashCode
 @Entity
 @Table(name = "brands")
 public class Brand {
@@ -13,6 +18,15 @@ public class Brand {
     @Column(name = "phone_number")
     private String phoneNumber;
     private String address;
+    @OneToMany(mappedBy = "brand",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Product> products=new ArrayList<>();
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public Brand(int id, String name, String description, String phoneNumber, String address) {
         this.id = id;

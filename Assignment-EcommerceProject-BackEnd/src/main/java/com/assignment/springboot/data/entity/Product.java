@@ -1,8 +1,13 @@
 package com.assignment.springboot.data.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.EqualsAndHashCode;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@EqualsAndHashCode
 @Entity
 @Table(name = "products")
 public class Product {
@@ -23,6 +28,27 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Rating> ratings;
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Image> images;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<CartDetail> cartDetails=new ArrayList<>();
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
     public Product(int id, String name, String description, float price, String status, Date createdDate, Date updatedDate, Category category, Brand brand) {
         this.id = id;
