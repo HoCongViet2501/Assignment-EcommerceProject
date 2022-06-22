@@ -32,8 +32,10 @@ public class Product {
     private List<Rating> ratings;
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Image> images;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<CartDetail> cartDetails=new ArrayList<>();
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<OrderDetail> orderDetails=new ArrayList<>();
     public List<Rating> getRatings() {
         return ratings;
     }

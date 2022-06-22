@@ -5,19 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
-
 @Setter
 @Getter
 @EqualsAndHashCode
 @Embeddable
-public class CartDetailId implements Serializable {
+public  class CartDetailId implements Serializable {
     private int productId;
-    private int shoppingSessionId;
+    private int sessionId;
 
-    public CartDetailId(int productId, int shoppingSessionId) {
+    public CartDetailId(int productId, int sessionId) {
         this.productId = productId;
-        this.shoppingSessionId = shoppingSessionId;
+        this.sessionId = sessionId;
     }
 
     public CartDetailId() {
