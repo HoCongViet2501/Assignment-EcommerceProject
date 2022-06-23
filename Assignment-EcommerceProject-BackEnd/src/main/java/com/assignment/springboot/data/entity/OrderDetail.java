@@ -2,10 +2,7 @@ package com.assignment.springboot.data.entity;
 
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,6 +11,14 @@ import java.util.Date;
 public class OrderDetail {
     @EmbeddedId
     private OrderDetailId orderDetailId;
+    @MapsId("orderId")
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+    @MapsId("productId")
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
     @Column(name = "amount_product")
     private int amountProduct;
     private float price;
@@ -23,6 +28,14 @@ public class OrderDetail {
     private Date createdDate;
     @Column(name = "updated_date")
     private Date updatedDate;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public OrderDetail(OrderDetailId orderDetailId, int amountProduct, float price, float totalMoney, Date createdDate, Date updatedDate) {
         this.orderDetailId = orderDetailId;

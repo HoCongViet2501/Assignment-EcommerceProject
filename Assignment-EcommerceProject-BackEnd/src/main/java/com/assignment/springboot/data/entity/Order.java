@@ -3,7 +3,9 @@ package com.assignment.springboot.data.entity;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @EqualsAndHashCode
 @Entity
@@ -25,6 +27,8 @@ public class Order {
     private Date createdDate;
     @Column(name = "updated_date")
     private Date updatedDate;
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<OrderDetail> orderDetails=new ArrayList<>();
     public Integer getId() {
         return id;
     }
