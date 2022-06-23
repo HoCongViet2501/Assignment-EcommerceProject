@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface BrandService {
     public List<Brand> getAllBrands();
+    public Brand addBrand(Brand brand);
 }

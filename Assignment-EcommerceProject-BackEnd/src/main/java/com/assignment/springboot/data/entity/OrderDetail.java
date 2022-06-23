@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "order_detail")
 public class OrderDetail {
     @EmbeddedId
-    private OrderDetailId orderDetailId=new OrderDetailId();
+    private OrderDetailId orderDetailId;
     @MapsId("orderId")
     @ManyToOne
     @JoinColumn(name = "order_id")

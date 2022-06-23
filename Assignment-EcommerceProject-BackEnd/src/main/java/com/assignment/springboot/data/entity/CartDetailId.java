@@ -8,9 +8,10 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.util.Objects;
+
 @Setter
 @Getter
-@EqualsAndHashCode
 @Embeddable
 public  class CartDetailId implements Serializable {
     private int productId;
@@ -23,5 +24,18 @@ public  class CartDetailId implements Serializable {
 
     public CartDetailId() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartDetailId that = (CartDetailId) o;
+        return productId == that.productId && sessionId == that.sessionId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId, sessionId);
     }
 }
