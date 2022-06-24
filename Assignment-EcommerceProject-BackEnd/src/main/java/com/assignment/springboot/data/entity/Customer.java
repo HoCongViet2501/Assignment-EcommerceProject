@@ -1,13 +1,17 @@
 package com.assignment.springboot.data.entity;
 
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-@EqualsAndHashCode
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "customers")
 public class Customer {
     @Id
@@ -31,49 +35,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_ID")
+    @JoinColumn(name = "account_id")
     private Account account;
-
-    public List<ShoppingSession> getShoppingSessions() {
-        return shoppingSessions;
-    }
-
-    public void setShoppingSessions(List<ShoppingSession> shoppingSessions) {
-        this.shoppingSessions = shoppingSessions;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-
-    public List<Bank> getBanks() {
-        return banks;
-    }
-
-    public void setBanks(List<Bank> banks) {
-        this.banks = banks;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 
     public Customer(int id, String firstName, String lastName, String gmail, String phoneNumber, String address, Account account) {
         this.id = id;
@@ -83,57 +46,5 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.account = account;
-    }
-
-    public Customer() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getGmail() {
-        return gmail;
-    }
-
-    public void setGmail(String gmail) {
-        this.gmail = gmail;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 }

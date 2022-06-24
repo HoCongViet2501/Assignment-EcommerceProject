@@ -1,10 +1,13 @@
 package com.assignment.springboot.data.entity;
-
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "banks")
 public class Bank {
@@ -20,32 +23,11 @@ public class Bank {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Bank(Integer id, String bankName, String cardNumber, String cardName) {
         this.id = id;
         this.bankName = bankName;
         this.cardNumber = cardNumber;
         this.cardName = cardName;
-    }
-    public Bank(){
-
-    }
-    public String getBankName() {
-        return bankName;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public String getCardName() {
-        return cardName;
     }
 }

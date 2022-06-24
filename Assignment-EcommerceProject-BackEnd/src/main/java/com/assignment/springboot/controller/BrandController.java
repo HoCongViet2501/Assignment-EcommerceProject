@@ -3,12 +3,9 @@ package com.assignment.springboot.controller;
 import com.assignment.springboot.data.entity.Brand;
 import com.assignment.springboot.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/brands")

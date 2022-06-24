@@ -1,10 +1,12 @@
 package com.assignment.springboot.data.entity;
 
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-@EqualsAndHashCode
 @Entity
+@Setter
+@Getter
 @Table(name = "accounts")
 public class Account {
     @Id
@@ -23,14 +25,6 @@ public class Account {
     @JoinColumn(name = "customer_ID")
     private Customer customer;
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     public Account(int id, String userName, String passWord, String role, String gmail, Employee employee, Customer customer) {
         this.id = id;
         this.userName = userName;
@@ -41,51 +35,5 @@ public class Account {
         this.customer = customer;
     }
     public Account(){}
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getGmail() {
-        return gmail;
-    }
-
-    public void setGmail(String gmail) {
-        this.gmail = gmail;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 }

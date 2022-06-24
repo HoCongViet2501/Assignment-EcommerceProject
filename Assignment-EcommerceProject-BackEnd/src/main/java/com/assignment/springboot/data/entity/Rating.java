@@ -1,10 +1,13 @@
 package com.assignment.springboot.data.entity;
-
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-@EqualsAndHashCode
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
 @Table(name = "ratings")
 public class Rating {
     @Id
@@ -23,40 +26,6 @@ public class Rating {
         this.id = id;
         this.voteStar = voteStar;
         this.customer = customer;
-        this.product = product;
-    }
-    public Rating(){
-
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getVoteStar() {
-        return voteStar;
-    }
-
-    public void setVoteStar(int voteStar) {
-        this.voteStar = voteStar;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
         this.product = product;
     }
 }
