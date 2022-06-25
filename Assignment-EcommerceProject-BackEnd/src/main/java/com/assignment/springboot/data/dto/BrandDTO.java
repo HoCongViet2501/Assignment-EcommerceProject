@@ -1,8 +1,5 @@
 package com.assignment.springboot.data.dto;
-
-import com.assignment.springboot.data.entity.Product;
 import lombok.*;
-import java.util.List;
 
 @Setter
 @Getter
@@ -15,7 +12,6 @@ public class BrandDTO {
     private String description;
     private String phoneNumber;
     private String address;
-    private List<ProductDTO> products;
 
     public BrandDTO(int id, String name, String description, String phoneNumber, String address) {
         this.id = id;

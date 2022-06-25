@@ -1,11 +1,8 @@
 package com.assignment.springboot.data.entity;
-
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +20,7 @@ public class Brand {
     private String phoneNumber;
     private String address;
     @OneToMany(mappedBy = "brand",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Product> products=new ArrayList<>();
+    private List<Product> products;
     public Brand(int id, String name, String description, String phoneNumber, String address) {
         this.id = id;
         this.name = name;

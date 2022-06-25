@@ -1,11 +1,11 @@
 package com.assignment.springboot.data.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,9 +38,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Image> images;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CartDetail> cartDetails = new ArrayList<>();
+    private List<CartDetail> cartDetails;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderDetail> orderDetails = new ArrayList<>();
+    private List<OrderDetail> orderDetails;
 
     public Product(int id, String name, String description, float price, Date createdDate, Date updatedDate, Category category, Brand brand, String status) {
         this.id = id;
@@ -53,4 +53,5 @@ public class Product {
         this.brand = brand;
         this.status = status;
     }
+
 }

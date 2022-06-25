@@ -1,10 +1,7 @@
 package com.assignment.springboot.data.dto;
 
-import com.assignment.springboot.data.entity.Brand;
-import com.assignment.springboot.data.entity.Category;
 import lombok.*;
 import java.util.Date;
-import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -20,5 +17,4 @@ public class ProductDTO {
     private Date updatedDate;
     private CategoryDTO category;
     private BrandDTO brand;
-    private List<ImageDTO> images;
 }

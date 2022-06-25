@@ -3,7 +3,6 @@ package com.assignment.springboot.data.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,8 +17,7 @@ public class Category {
     private int id;
     private String name;
     private String description;
-    private String address;
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Product> products=new ArrayList<>();
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 
 }

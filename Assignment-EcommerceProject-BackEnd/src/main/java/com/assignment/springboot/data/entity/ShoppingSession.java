@@ -1,6 +1,4 @@
 package com.assignment.springboot.data.entity;
-
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

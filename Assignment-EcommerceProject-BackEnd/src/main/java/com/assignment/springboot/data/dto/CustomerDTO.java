@@ -18,5 +18,4 @@ public class CustomerDTO {
     private String gmail;
     private String phoneNumber;
     private String address;
-    private List<Order> orders;
 }

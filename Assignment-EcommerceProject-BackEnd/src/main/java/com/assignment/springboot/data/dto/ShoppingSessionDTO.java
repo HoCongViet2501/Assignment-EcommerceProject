@@ -1,10 +1,7 @@
 package com.assignment.springboot.data.dto;
-
-import com.assignment.springboot.data.entity.CartDetail;
 import com.assignment.springboot.data.entity.Customer;
 import lombok.*;
 import java.util.Date;
-import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -15,5 +12,4 @@ public class ShoppingSessionDTO {
     private Customer customer;
     private Date createdDate;
     private Date updatedDate;
-    private List<CartDetail> cartDetails;
 }
