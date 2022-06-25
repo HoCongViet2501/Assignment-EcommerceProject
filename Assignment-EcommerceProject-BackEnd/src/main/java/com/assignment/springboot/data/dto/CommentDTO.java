@@ -1,6 +1,4 @@
 package com.assignment.springboot.data.dto;
-
-import com.assignment.springboot.data.entity.Rating;
 import lombok.*;
 
 @Setter

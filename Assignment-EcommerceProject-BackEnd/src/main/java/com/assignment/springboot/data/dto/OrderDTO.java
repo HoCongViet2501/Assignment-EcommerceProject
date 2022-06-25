@@ -4,11 +4,7 @@ import com.assignment.springboot.data.entity.Customer;
 import com.assignment.springboot.data.entity.Employee;
 import com.assignment.springboot.data.entity.OrderDetail;
 import lombok.*;
-
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Setter
 @Getter
@@ -23,5 +19,4 @@ public class OrderDTO {
     private String status;
     private Date createdDate;
     private Date updatedDate;
-    private List<OrderDetail> orderDetails;
 }
