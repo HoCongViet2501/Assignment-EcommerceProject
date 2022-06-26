@@ -58,28 +58,30 @@ public class BrandServiceImpl implements BrandService {
         BrandDTO brandDTO = mapper.map(brand, BrandDTO.class);
         if (brand != null) {
             return brandDTO;
+        }else{
+            throw new ResourceNotFoundException("Can't find brand have name " + name);
         }
-        throw new ResourceNotFoundException("Can't find brand have name " + name);
+
     }
 
     @Override
     public void deleteBrand(int id) {
         log.info("delete brand by id of brand ");
         Brand brand = this.brandRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Can't find brand have id" + id));
+                () -> new ResourceNotFoundException("Can't find brand have id: " + id));
         this.brandRepository.delete(brand);
     }
 
     @Override
-    public BrandDTO updateBrand(BrandDTO brandDTO,int id) {
-        Optional<Brand> brandOptional=this.brandRepository.findById(id);
-        if(brandOptional.isPresent()){
-            Brand brand=brandOptional.get();
-            mapper.map(brandDTO,brand);
+    public void updateBrand(BrandDTO brandDTO, int id) {
+        log.info("update brand");
+        Optional<Brand> brandOptional = this.brandRepository.findById(id);
+        if (brandOptional.isPresent()) {
+            Brand brand = brandOptional.get();
+            mapper.map(brandDTO, brand);
             this.brandRepository.save(brand);
-            return brandDTO;
+        }else {
+            throw new ResourceNotFoundException("can't find brand have id: "+id);
         }
-        throw new ResourceNotFoundException("Can't update brand");
     }
-
 }

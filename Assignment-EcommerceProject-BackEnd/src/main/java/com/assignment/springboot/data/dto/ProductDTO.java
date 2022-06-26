@@ -12,6 +12,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private float price;
+    private int quantity;
     private String status;
     private Date createdDate;
     private Date updatedDate;
