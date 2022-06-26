@@ -10,5 +10,5 @@ public interface BrandService {
     BrandDTO saveBrand(BrandDTO brand);
     BrandDTO findBrandByName(String name);
     void deleteBrand(int id);
-    BrandDTO updateBrand(BrandDTO brandDTO,int id);
+    void updateBrand(BrandDTO brandDTO,int id);
 }

@@ -3,6 +3,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
@@ -14,8 +15,10 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "please fill brand name")
     private String name;
     private String description;
+    @NotBlank(message = "please fill phone number of this brand")
     @Column(name = "phone_number")
     private String phoneNumber;
     private String address;

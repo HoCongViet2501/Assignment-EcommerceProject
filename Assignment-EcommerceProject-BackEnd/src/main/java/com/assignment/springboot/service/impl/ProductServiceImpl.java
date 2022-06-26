@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Slf4j
@@ -45,5 +46,26 @@ public class ProductServiceImpl implements ProductService {
             return modelMapper.map(optionalProduct.get(),ProductDTO.class);
         }
         throw new ResourceNotFoundException("Book not found in id: "+id);
+    }
+
+    @Override
+    public ProductDTO saveProduct(ProductDTO productDTO) {
+        log.info("save new product");
+        productDTO.setCreatedDate(new Date());
+        Product productMapper=modelMapper.map(productDTO,Product.class);
+        this.productRepository.save(productMapper);
+        return productDTO;
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        log.info("delete product by id");
+        Optional<Product> product=this.productRepository.findById(id);
+        if(product.isPresent()){
+            this.productRepository.delete(product.get());
+
+        }else{
+            throw new ResourceNotFoundException("Can't find product have id: "+ id);
+        }
     }
 }

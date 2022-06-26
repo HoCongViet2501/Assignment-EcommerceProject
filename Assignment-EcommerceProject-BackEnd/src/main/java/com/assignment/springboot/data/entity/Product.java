@@ -1,11 +1,13 @@
 package com.assignment.springboot.data.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +20,14 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "please fill name of product")
     private String name;
     private String description;
+    @NotNull(message = "please fill price of product")
     private float price;
-
+    @Min(value = 0,message = "quantity can not negative")
+    @Column(name = "quantity")
+    private int quantity;
     @Column(name = "created_date")
     private Date createdDate;
     @Column(name = "updated_date")
@@ -32,6 +38,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+    @NotBlank(message = "please fill status of product")
     private String status;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings;
