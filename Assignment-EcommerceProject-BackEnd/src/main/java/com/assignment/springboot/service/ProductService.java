@@ -10,4 +10,5 @@ public interface ProductService {
     ProductDTO findProductById(int id);
     ProductDTO saveProduct(ProductDTO productDTO);
     void deleteProduct(int id);
+    ProductDTO updateProduct(ProductDTO productDTO, int id);
 }

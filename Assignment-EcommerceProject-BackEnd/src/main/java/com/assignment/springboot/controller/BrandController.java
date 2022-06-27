@@ -1,7 +1,6 @@
 package com.assignment.springboot.controller;
 
 import com.assignment.springboot.data.dto.BrandDTO;
-import com.assignment.springboot.exception.ResourceNotFoundException;
 import com.assignment.springboot.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +36,7 @@ public class BrandController {
     }
 
     @GetMapping("/name")
-    public ResponseEntity<?> findBrandByName(@RequestParam String name) {
+    public ResponseEntity<BrandDTO> findBrandByName(@RequestParam String name) {
         BrandDTO brandDTO = this.brandService.findBrandByName(name);
         return ResponseEntity.ok().body(brandDTO);
     }
