@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 @Entity
 @Getter
@@ -20,20 +20,22 @@ public class Customer implements Serializable {
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
+    @NotNull(message = "please fill last name")
     private String lastName;
     private String gmail;
 
     @Column(name = "phone_number")
+    @NotNull(message = "please fill phone number")
     private String phoneNumber;
     private String address;
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Bank> banks = new ArrayList<>();
+    private List<Bank> banks;
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Rating> ratings = new ArrayList<>();
+    private List<Rating> ratings;
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ShoppingSession> shoppingSessions = new ArrayList<>();
+    private List<ShoppingSession> shoppingSessions;
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Order> orders = new ArrayList<>();
+    private List<Order> orders;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
