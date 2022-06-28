@@ -2,6 +2,8 @@ package com.assignment.springboot.data.dto;
 
 import lombok.*;
 import java.util.Date;
+import java.util.List;
+
 @Setter
 @Getter
 @EqualsAndHashCode
