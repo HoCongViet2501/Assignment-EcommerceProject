@@ -44,11 +44,8 @@ public class BrandServiceImpl implements BrandService {
     public BrandDTO saveBrand(BrandDTO brandDTO) {
         log.info("save new brand to database");
         Brand brand = mapper.map(brandDTO, Brand.class);
-        Brand brandSave = this.brandRepository.save(brand);
-        if (brandSave != null) {
+        this.brandRepository.save(brand);
             return brandDTO;
-        }
-        throw new ResourceNotFoundException("Can't save brand to database");
     }
 
     @Override

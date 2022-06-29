@@ -1,4 +1,5 @@
 package com.assignment.springboot.data.entity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @Embeddable
-public  class CartDetailId implements Serializable {
+public class CartDetailId implements Serializable {
     private int productId;
     private int sessionId;
 

@@ -14,8 +14,8 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class CustomerServiceImpl implements CustomerService {
-    private CustomerRepository customerRepository;
-    private ModelMapper modelMapper;
+    private final CustomerRepository customerRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository, ModelMapper modelMapper) {

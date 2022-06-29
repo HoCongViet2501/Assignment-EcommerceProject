@@ -3,6 +3,7 @@ package com.assignment.springboot.data.entity;
 import lombok.*;
 
 import javax.persistence.*;
+
 @Entity
 @Setter
 @Getter
