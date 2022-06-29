@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
 @Entity
 @Setter
 @Getter
@@ -34,6 +35,8 @@ public class Account {
         this.employee = employee;
         this.customer = customer;
     }
-    public Account(){}
+
+    public Account() {
+    }
 
 }

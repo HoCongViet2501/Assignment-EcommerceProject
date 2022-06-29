@@ -1,4 +1,5 @@
 package com.assignment.springboot.data.entity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "card_detail")
-public class CartDetail{
+public class CartDetail {
 
     @EmbeddedId
     private CartDetailId cartDetailId;
