@@ -19,7 +19,7 @@ import java.util.List;
 @Validated
 @RequestMapping("/api/brands")
 public class BrandController {
-    private BrandService brandService;
+    private final BrandService brandService;
 
     @Autowired
     public BrandController(BrandService brandService) {
@@ -30,21 +30,21 @@ public class BrandController {
     @GetMapping
     @Operation(summary = "get all brand")
     public List<BrandDTO> getBrands() {
-        return brandService.getAllBrands();
+        return brandService.getBrands();
     }
 
     @PostMapping
     @Operation(summary = "create new brand")
     @ResponseStatus(HttpStatus.CREATED)
     public BrandDTO createBrand(@Valid @RequestBody BrandDTO brandDTO) {
-        return this.brandService.saveBrand(brandDTO);
+        return this.brandService.createBrand(brandDTO);
     }
 
     @GetMapping("/name")
     @Operation(summary = "get brand by name")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "found brand by name"),
-            @ApiResponse(responseCode = "404",description = "not found brand")
+            @ApiResponse(responseCode = "200", description = "found.brand.by.name"),
+            @ApiResponse(responseCode = "404", description = "not.found.brand")
     })
     public ResponseEntity<BrandDTO> findBrandByName(@RequestParam String name) {
         BrandDTO brandDTO = this.brandService.findBrandByName(name);
@@ -54,12 +54,12 @@ public class BrandController {
     @DeleteMapping("/{id}")
     @Operation(summary = "delete brand by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "delete success"),
-            @ApiResponse(responseCode = "404",description = "not found brand")
+            @ApiResponse(responseCode = "200", description = "delete.success"),
+            @ApiResponse(responseCode = "404", description = "not.found.brand")
     })
     public ResponseEntity<String> deleteBrand(@PathVariable int id) {
         brandService.deleteBrand(id);
-        return ResponseEntity.ok().body("Delete success");
+        return ResponseEntity.ok().body("Delete.success.brand.have.id " + id);
     }
 
     @PutMapping("/{id}")

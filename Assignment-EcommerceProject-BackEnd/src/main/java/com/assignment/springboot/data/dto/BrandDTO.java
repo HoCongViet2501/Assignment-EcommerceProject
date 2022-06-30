@@ -1,5 +1,8 @@
 package com.assignment.springboot.data.dto;
+
 import lombok.*;
+
+import javax.validation.constraints.NotBlank;
 
 @Setter
 @Getter
@@ -8,8 +11,10 @@ import lombok.*;
 @ToString
 public class BrandDTO {
     private int id;
+    @NotBlank(message = "please.fill.brand.name")
     private String name;
     private String description;
+    @NotBlank(message = "please.fill.phone.number.of.this.brand")
     private String phoneNumber;
     private String address;
 

@@ -8,12 +8,15 @@ import com.assignment.springboot.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -29,59 +32,51 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDTO> getCategories() {
-        log.info("get all category");
         List<Category> categories = this.categoryRepository.findAll();
-        if (!categories.isEmpty()) {
-            List<CategoryDTO> categoryDTOS = new ArrayList<>();
-            for (Category category : categories) {
-                categoryDTOS.add(modelMapper.map(category, CategoryDTO.class));
-            }
-            return categoryDTOS;
+        if (categories.isEmpty()) {
+            throw new ResourceNotFoundException("Can't.get.list.categories");
         }
-        return Collections.emptyList();
+        return categories.stream().map(this::mapToDto).collect(Collectors.toList());
+    }
+
+    private CategoryDTO mapToDto(Category category) {
+        return this.modelMapper.map(category, CategoryDTO.class);
     }
 
     @Override
     public CategoryDTO findCategoryByName(String name) {
-        log.info("find category by name");
+        log.info("find.category.by.name");
         Category category = this.categoryRepository.findCategoriesByName(name);
-        CategoryDTO categoryDTO = modelMapper.map(category, CategoryDTO.class);
-        if (category != null) {
-            return categoryDTO;
-        } else {
-            throw new ResourceNotFoundException("Can't find category have name : " + name);
+        if (category == null) {
+            throw new ResourceNotFoundException("Can't.find.category.have.name : " + name);
         }
+        return mapToDto(category);
     }
 
     @Override
-    public boolean deleteCategory(int id) {
+    public void deleteCategory(int id) {
         log.info("delete category by id");
         Category category = this.categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("can't find category have id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("can't.find.category.have.id " + id));
         this.categoryRepository.delete(category);
-        return true;
     }
 
     @Override
     public CategoryDTO updateCategory(CategoryDTO categoryDTO, int id) {
-        log.info("update category");
         Optional<Category> optionalCategory = this.categoryRepository.findById(id);
-        if (optionalCategory.isPresent()) {
-            Category category = optionalCategory.get();
-            modelMapper.map(categoryDTO, category);
-            this.categoryRepository.save(category);
-            return categoryDTO;
-        } else {
-            throw new ResourceNotFoundException("can't find category have id: " + id);
+        if (optionalCategory.isEmpty()) {
+            throw new ResourceNotFoundException("can't.find.category.have.id: " + id);
         }
+        Category category = optionalCategory.get();
+        mapToDto(category);
+        this.categoryRepository.save(category);
+        return categoryDTO;
     }
 
     @Override
-    public boolean saveCategory(CategoryDTO categoryDTO) {
-        log.info("save new category to database");
-        Category category = modelMapper.map(categoryDTO, Category.class);
-        this.categoryRepository.save(category);
-        return true;
+    public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+        this.categoryRepository.save(modelMapper.map(categoryDTO, Category.class));
+        return categoryDTO;
     }
 
 }

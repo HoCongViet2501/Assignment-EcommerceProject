@@ -8,7 +8,10 @@ public interface ProductService {
     List<ProductDTO> getProducts();
 
     ProductDTO findProductById(int id);
-    ProductDTO saveProduct(ProductDTO productDTO);
+
+    ProductDTO createProduct(ProductDTO productDTO);
+
     void deleteProduct(int id);
+
     ProductDTO updateProduct(ProductDTO productDTO, int id);
 }

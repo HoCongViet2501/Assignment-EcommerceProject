@@ -9,10 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -27,58 +26,50 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<BrandDTO> getAllBrands() {
-        log.info("get all brands from database");
+    public List<BrandDTO> getBrands() {
         List<Brand> brands = this.brandRepository.findAll();
-        if (!brands.isEmpty()) {
-            List<BrandDTO> brandDTOS = new ArrayList<>();
-            for (Brand brand : brands) {
-                brandDTOS.add(mapper.map(brand, BrandDTO.class));
-            }
-            return brandDTOS;
+        if (brands.isEmpty()) {
+            throw new ResourceNotFoundException("Can't.get.list.brands");
         }
-        throw new ResourceNotFoundException("Can't get all brands");
+        return brands.stream().map(this::mapToDto).collect(Collectors.toList());
+    }
+
+    private BrandDTO mapToDto(Brand brand) {
+        return this.mapper.map(brand, BrandDTO.class);
     }
 
     @Override
-    public BrandDTO saveBrand(BrandDTO brandDTO) {
-        log.info("save new brand to database");
-        Brand brand = mapper.map(brandDTO, Brand.class);
+    public BrandDTO createBrand(BrandDTO brandDto) {
+        Brand brand = mapper.map(brandDto, Brand.class);
         this.brandRepository.save(brand);
-            return brandDTO;
+        return brandDto;
     }
 
     @Override
     public BrandDTO findBrandByName(String name) {
-        log.info("find brand by name of brand ");
-        Brand brand = this.brandRepository.findBrandByName(name);
-        BrandDTO brandDTO = mapper.map(brand, BrandDTO.class);
-        if (brand != null) {
-            return brandDTO;
-        }else{
-            throw new ResourceNotFoundException("Can't find brand have name " + name);
+        log.info("find.brand.by.name.of.brand ");
+        BrandDTO brandDto = mapper.map(this.brandRepository.findBrandByName(name), BrandDTO.class);
+        if (brandDto == null) {
+            throw new ResourceNotFoundException("Can't.find.brand.have.name " + name);
         }
-
+        return brandDto;
     }
 
     @Override
     public void deleteBrand(int id) {
-        log.info("delete brand by id of brand ");
         Brand brand = this.brandRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Can't find brand have id: " + id));
+                () -> new ResourceNotFoundException("Can't.find.brand.have.id: " + id));
         this.brandRepository.delete(brand);
     }
 
     @Override
-    public void updateBrand(BrandDTO brandDTO, int id) {
-        log.info("update brand");
+    public void updateBrand(BrandDTO brandDto, int id) {
         Optional<Brand> brandOptional = this.brandRepository.findById(id);
-        if (brandOptional.isPresent()) {
-            Brand brand = brandOptional.get();
-            mapper.map(brandDTO, brand);
-            this.brandRepository.save(brand);
-        }else {
-            throw new ResourceNotFoundException("can't find brand have id: "+id);
+        if (brandOptional.isEmpty()) {
+            throw new ResourceNotFoundException("can't.find.brand.have.id: " + id);
         }
+        Brand brand = brandOptional.get();
+        mapper.map(brandDto, brand);
+        this.brandRepository.save(brand);
     }
 }

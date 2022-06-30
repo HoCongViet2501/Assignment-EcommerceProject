@@ -1,10 +1,7 @@
 package com.assignment.springboot.data.dto;
-
-import com.assignment.springboot.data.entity.Order;
 import lombok.*;
 
-import javax.persistence.Column;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Setter
 @Getter
@@ -14,8 +11,10 @@ import java.util.List;
 public class CustomerDTO {
     private int id;
     private String firstName;
+    @NotNull(message = "please.fill.last.name")
     private String lastName;
     private String gmail;
+    @NotNull(message = "please.fill.phone.number")
     private String phoneNumber;
     private String address;
 }

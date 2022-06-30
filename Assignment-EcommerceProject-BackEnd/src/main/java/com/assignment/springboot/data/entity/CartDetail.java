@@ -20,7 +20,7 @@ public class CartDetail {
     private Product product;
     @MapsId("sessionId")
     @ManyToOne
-    @JoinColumn(name = "shopingsession_id")
+    @JoinColumn(name = "shoping_session_id")
     private ShoppingSession session;
     @Column(name = "amount_product")
     private int amountProduct;

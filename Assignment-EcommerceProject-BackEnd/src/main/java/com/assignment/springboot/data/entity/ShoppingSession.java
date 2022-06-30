@@ -1,4 +1,5 @@
 package com.assignment.springboot.data.entity;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +27,7 @@ public class ShoppingSession implements Serializable {
     private Date createdDate;
     @Column(name = "updated_date")
     private Date updatedDate;
-    @OneToMany(mappedBy = "session",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CartDetail> cartDetails = new ArrayList<>();
 
     public ShoppingSession(int id, Customer customer, Date createdDate, Date updatedDate) {

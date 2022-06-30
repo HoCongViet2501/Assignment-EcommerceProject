@@ -32,8 +32,8 @@ public class Order {
     private Date createdDate;
     @Column(name = "updated_date")
     private Date updatedDate;
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<OrderDetail> orderDetails=new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     public Order(Integer id, Employee employee, Customer customer, String payment, String status, Date createdDate, Date updatedDate) {
         this.id = id;
