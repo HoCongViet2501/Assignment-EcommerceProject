@@ -18,5 +18,7 @@ public class Auth {
         this.token = token;
         this.role = role;
     }
-    public Auth(){}
+
+    public Auth() {
+    }
 }

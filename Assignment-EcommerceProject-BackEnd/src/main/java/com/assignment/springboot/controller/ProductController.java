@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class ProductController {
     @GetMapping("/{id}")
     @Operation(summary = "find product by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",description = "found the product")
+            @ApiResponse(responseCode = "200", description = "found.the.product")
     })
     public ProductDTO findProductById(@PathVariable int id) {
         return this.productService.findProductById(id);
@@ -38,8 +39,8 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "create new product")
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
-        this.productService.saveProduct(productDTO);
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
+        this.productService.createProduct(productDTO);
         return ResponseEntity.ok().body(productDTO);
     }
 
@@ -47,12 +48,12 @@ public class ProductController {
     @Operation(summary = "delete product by id")
     public ResponseEntity<String> deleteProduct(@PathVariable int id) {
         this.productService.deleteProduct(id);
-        return ResponseEntity.ok().body("Delete success product have id " + id);
+        return ResponseEntity.ok().body("Delete.success.product.have.id " + id);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "update product")
-    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO, @PathVariable int id) {
+    public ResponseEntity<ProductDTO> updateProduct(@Valid @RequestBody ProductDTO productDTO, @PathVariable int id) {
         this.productService.updateProduct(productDTO, id);
         return ResponseEntity.ok().body(productDTO);
     }

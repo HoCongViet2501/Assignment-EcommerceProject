@@ -20,10 +20,10 @@ public class Account {
     private String role;
     private String gmail;
     @OneToOne
-    @JoinColumn(name = "employee_ID")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
     @OneToOne
-    @JoinColumn(name = "customer_ID")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     public Account(int id, String userName, String passWord, String role, String gmail, Employee employee, Customer customer) {

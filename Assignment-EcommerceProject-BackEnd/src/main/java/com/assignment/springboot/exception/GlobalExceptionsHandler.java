@@ -12,13 +12,20 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionsHandler {
     @ExceptionHandler({ResourceNotFoundException.class})
-    public ResponseEntity<Object> resourceNotFoundHandling(ResourceNotFoundException exception,WebRequest request){
-        ErrorResponse errorResponse=new ErrorResponse(new Date(),exception.getMessage(),request.getDescription(false));
-        return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> resourceNotFoundHandling(ResourceNotFoundException exception, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(new Date(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> globalExceptionHandling(Exception exception,WebRequest request){
-        ErrorResponse errorResponse=new ErrorResponse(new Date(),exception.getMessage(),request.getDescription(false));
-        return new ResponseEntity<>(errorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Object> globalExceptionHandling(Exception exception, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(new Date(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler({ForbiddenException.class})
+    public ResponseEntity<Object> forbiddenExceptionHandling(ForbiddenException forbiddenException,WebRequest request){
+        ErrorResponse errorResponse=new ErrorResponse(new Date(),forbiddenException.getMessage(),request.getDescription(false));
+        return new ResponseEntity<>(errorResponse,HttpStatus.FORBIDDEN);
     }
 }

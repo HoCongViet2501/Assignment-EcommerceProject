@@ -3,6 +3,7 @@ package com.assignment.springboot.exception;
 import lombok.*;
 
 import java.util.Date;
+
 @Setter
 @Getter
 @EqualsAndHashCode
@@ -10,7 +11,7 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 public class ErrorResponse {
-    private Date timestamp;
+    private Date timeStamp;
     private String message;
     private String errors;
 }

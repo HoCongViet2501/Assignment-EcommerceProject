@@ -20,12 +20,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank(message = "please fill name of product")
     private String name;
     private String description;
-    @NotNull(message = "please fill price of product")
     private float price;
-    @Min(value = 0,message = "quantity can not negative")
     @Column(name = "quantity")
     private int quantity;
     @Column(name = "created_date")
@@ -38,7 +35,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
-    @NotBlank(message = "please fill status of product")
     private String status;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings;

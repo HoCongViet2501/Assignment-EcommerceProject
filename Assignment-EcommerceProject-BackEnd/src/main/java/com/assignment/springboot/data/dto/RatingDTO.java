@@ -1,8 +1,6 @@
 package com.assignment.springboot.data.dto;
-
-import com.assignment.springboot.data.entity.Customer;
-import com.assignment.springboot.data.entity.Product;
 import lombok.*;
+
 @Setter
 @Getter
 @EqualsAndHashCode
