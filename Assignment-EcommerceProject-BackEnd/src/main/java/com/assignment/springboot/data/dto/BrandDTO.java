@@ -25,4 +25,11 @@ public class BrandDTO {
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+    
+    public BrandDTO(String name, String description, String phoneNumber, String address) {
+        this.name = name;
+        this.description = description;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
 }
