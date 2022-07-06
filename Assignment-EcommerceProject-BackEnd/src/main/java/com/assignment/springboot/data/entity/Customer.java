@@ -27,8 +27,6 @@ public class Customer implements Serializable {
     private String phoneNumber;
     private String address;
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Bank> banks;
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Rating> ratings;
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ShoppingSession> shoppingSessions;

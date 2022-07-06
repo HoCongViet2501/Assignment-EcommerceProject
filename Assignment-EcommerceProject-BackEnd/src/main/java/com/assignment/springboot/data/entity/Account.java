@@ -1,26 +1,29 @@
 package com.assignment.springboot.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import java.util.Collection;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @Table(name = "accounts")
-public class Account implements UserDetails {
+public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "password")
+	@Size(min = 6,max = 100)
+	@JsonIgnore
 	private String passWord;
-	private String role;
 	private String gmail;
 	@OneToOne
 	@JoinColumn(name = "employee_id")
@@ -28,48 +31,18 @@ public class Account implements UserDetails {
 	@OneToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "account_roles",
+			joinColumns = @JoinColumn(name = "account_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+	)
+	private Set<Role> roles=new HashSet<>();
 	
-	public Account(int id, String passWord, String role, String gmail, Employee employee, Customer customer) {
+	public Account(int id, String passWord, String gmail, Employee employee, Customer customer) {
 		this.id = id;
 		this.passWord = passWord;
-		this.role = role;
 		this.gmail = gmail;
 		this.employee = employee;
 		this.customer = customer;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
-	
-	@Override
-	public String getPassword() {
-		return null;
-	}
-	
-	@Override
-	public String getUsername() {
-		return null;
-	}
-	
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
-	
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
-	}
-	
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
-	}
-	
-	@Override
-	public boolean isEnabled() {
-		return false;
 	}
 }

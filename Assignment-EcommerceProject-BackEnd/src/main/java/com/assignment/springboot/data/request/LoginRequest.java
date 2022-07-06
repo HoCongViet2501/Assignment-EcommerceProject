@@ -1,5 +1,6 @@
 package com.assignment.springboot.data.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 @NoArgsConstructor
-public class AuthRequest {
+@AllArgsConstructor
+public class LoginRequest {
 	@NotNull(message = "required")
 	@Email
 	@Length(min = 10,max = 50)

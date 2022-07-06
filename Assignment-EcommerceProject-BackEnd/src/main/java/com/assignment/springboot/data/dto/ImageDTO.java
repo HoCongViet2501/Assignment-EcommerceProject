@@ -11,6 +11,5 @@ import lombok.*;
 public class ImageDTO {
     private int id;
     private String fileType;
-    private Product product;
     private byte[] file;
 }
