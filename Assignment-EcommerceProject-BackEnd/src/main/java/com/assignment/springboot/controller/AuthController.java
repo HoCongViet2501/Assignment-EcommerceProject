@@ -1,6 +1,5 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.data.entity.Account;
 import com.assignment.springboot.data.request.LoginRequest;
 import com.assignment.springboot.data.response.JwtResponse;
 import com.assignment.springboot.repository.AccountRepository;
@@ -51,8 +50,9 @@ public class AuthController {
 				userDetails.getGmail(),
 				roles));
 	}
+	
 	@GetMapping("/test")
-	public ResponseEntity<?> getAccount(@RequestParam String gmail){
+	public ResponseEntity<?> getAccount(@RequestParam String gmail) {
 		return ResponseEntity.ok().body(accountRepository.findByGmail(gmail));
 	}
 }
