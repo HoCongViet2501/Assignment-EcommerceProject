@@ -63,7 +63,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public void updateBrand(BrandDTO brandDto, int id) {
+    public BrandDTO updateBrand(BrandDTO brandDto, int id) {
         Optional<Brand> brandOptional = this.brandRepository.findById(id);
         if (brandOptional.isEmpty()) {
             throw new ResourceNotFoundException("can't.find.brand.have.id: " + id);
@@ -71,5 +71,6 @@ public class BrandServiceImpl implements BrandService {
         Brand brand = brandOptional.get();
         mapper.map(brandDto, brand);
         this.brandRepository.save(brand);
+        return brandDto;
     }
 }
