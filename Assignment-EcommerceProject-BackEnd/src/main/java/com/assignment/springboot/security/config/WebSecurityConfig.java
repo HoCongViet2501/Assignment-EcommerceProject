@@ -19,41 +19,35 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	private final UserDetailsServiceImpl userDetailsService;
-	
-	final private JwtAuthEntryPoint unauthorizedHandler;
-	
-	private final JwtTokenUtil jwtUtils;
-	
-	public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthEntryPoint unauthorizedHandler, JwtTokenUtil jwtUtils) {
-		this.userDetailsService = userDetailsService;
-		this.unauthorizedHandler = unauthorizedHandler;
-		this.jwtUtils = jwtUtils;
-	}
-	
+
+	private  UserDetailsServiceImpl userDetailsService;
+
+	private  JwtAuthEntryPoint unauthorizedHandler;
+
+	private  JwtTokenUtil jwtUtils;
+
 	@Bean
 	public JwtTokenFilter authenticationJwtTokenFilter() {
 		return new JwtTokenFilter(jwtUtils, userDetailsService);
 	}
-	
+
 	@Override
 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
 		// TODO
 		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-	
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable();
