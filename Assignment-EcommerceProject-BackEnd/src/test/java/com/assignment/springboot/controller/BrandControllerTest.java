@@ -1,6 +1,5 @@
-package com.assignment.springboot.test;
+package com.assignment.springboot.controller;
 
-import com.assignment.springboot.controller.BrandController;
 import com.assignment.springboot.data.dto.BrandDTO;
 import com.assignment.springboot.service.BrandService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,12 +15,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class BrandControllerTest {
 	private final BrandController brandController;
@@ -37,7 +36,7 @@ public class BrandControllerTest {
 	}
 	
 	@BeforeEach
-	void setUp()  {
+	void setUp() {
 		objectMapper = new ObjectMapper();
 		this.mockMvc = MockMvcBuilders.standaloneSetup(brandController).build();
 		this.brandDtos = new ArrayList<>();
@@ -49,15 +48,17 @@ public class BrandControllerTest {
 	@Test
 	public void getBrand_ShouldReturnListBrands_WhenDataAvailable() throws Exception {
 		BDDMockito.given(brandService.getBrands()).willReturn(brandDtos);
-		this.mockMvc.perform(get("/api/brands"))
+		this.mockMvc.perform(get("/api/brands")
+						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().is(200))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.size()", is(brandDtos.size())))
+				.andExpect(jsonPath("$[0].name", is(brandDtos.get(0).getName())))
 				.andExpect(content().string(objectMapper.writeValueAsString(brandDtos.toArray())));
 	}
 	
 	@Test
-	public void whenPostBrand_thenAddBrandCalled_andBrandReturned() throws Exception {
-		Mockito.doReturn(brandDto).when(brandService).createBrand(brandDto);
+	public void createBrand_thenAddBrandCalled_andBrandReturned() throws Exception {
+		when(brandService.createBrand(brandDto)).thenReturn(brandDto);
 		String contentBrand = objectMapper.writeValueAsString(brandDto);
 		this.mockMvc.perform(post("/api/brands")
 						.contentType(MediaType.APPLICATION_JSON)
@@ -67,19 +68,20 @@ public class BrandControllerTest {
 	}
 	
 	@Test
-	public void shouldReturnBrand_whenFindBrandByName_andExistData() throws Exception {
-		Mockito.doReturn(brandDtos.get(0)).when(brandService).findBrandByName("test_name");
+	public void whenFindBrandByName_shouldReturnBrand() throws Exception {
+		when(brandService.findBrandByName("test_name")).thenReturn(brandDto);
 		this.mockMvc.perform(get("/api/brands/name?name=test_name")
 						.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().is(200))
-				.andExpect(content().string(objectMapper.writeValueAsString(brandDtos.get(0))));
+				.andExpect(jsonPath("$.name", is(brandDto.getName())))
+				.andExpect(content().string(objectMapper.writeValueAsString(brandDto)));
 	}
 	
 	@Test
 	public void updateBrand_shouldReturnBrand_whenUpdated() throws Exception {
 		brandDto.setAddress("update address");
 		String contentBrand = objectMapper.writeValueAsString(brandDto);
-		Mockito.doReturn(brandDto).when(brandService).updateBrand(brandDto, 1);
+		when(brandService.updateBrand(brandDto, 1)).thenReturn(brandDto);
 		this.mockMvc.perform(put("/api/brands/1")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(contentBrand))
@@ -89,16 +91,17 @@ public class BrandControllerTest {
 	
 	@Test
 	public void deleteBrand_shouldReturnNotification_afterDeleteSuccess() throws Exception {
-		Mockito.doNothing().when(brandService).deleteBrand(brandDto.getId());
-		this.mockMvc.perform(delete("/api/brands/{id}",brandDto.getId()))
+		doReturn(String.class).when(brandService).deleteBrand(brandDto.getId());
+		this.mockMvc.perform(delete("/api/brands/{id}", brandDto.getId()))
 				.andExpect(status().is(200))
-				.andExpect(content().string("Delete.success.brand.have.id "+brandDto.getId()));
+				.andExpect(content().string("Delete.success.brand.have.id " + brandDto.getId()));
 	}
+	
 	@Test
-	public void shouldReturn404_whenDeletingNonExistingBrand_whenFindById() throws Exception {
-		int id=40;
-		Mockito.doNothing().when(brandService).deleteBrand(id);
-		this.mockMvc.perform(delete("/api/brands/{id}",id))
+	public void whenDeletingNonExistingBrand_shouldReturn404_whenFindById() throws Exception {
+		int id = 40;
+		doReturn(String.class).when(brandService).deleteBrand(brandDtos.get(0).getId());
+		this.mockMvc.perform(delete("/api/brands/{id}", id))
 				.andExpect(status().is(404));
 	}
 }
