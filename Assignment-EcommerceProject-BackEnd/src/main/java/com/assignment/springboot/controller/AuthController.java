@@ -1,7 +1,7 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.data.request.LoginRequest;
-import com.assignment.springboot.data.response.JwtResponse;
+import com.assignment.springboot.dto.request.LoginRequest;
+import com.assignment.springboot.dto.response.JwtResponse;
 import com.assignment.springboot.repository.AccountRepository;
 import com.assignment.springboot.service.impl.UserDetailsImpl;
 import com.assignment.springboot.security.jwt.JwtTokenUtil;
@@ -26,11 +26,11 @@ public class AuthController {
 	@Autowired
 	AccountRepository accountRepository;
 	
-	@Autowired
-	public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil) {
-		this.authenticationManager = authenticationManager;
-		this.jwtTokenUtil = jwtTokenUtil;
-	}
+//	@Autowired
+//	public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil) {
+//		this.authenticationManager = authenticationManager;
+//		this.jwtTokenUtil = jwtTokenUtil;
+//	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody @Valid LoginRequest loginRequest) {

@@ -1,7 +1,6 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.data.dto.CategoryDTO;
-import com.assignment.springboot.exception.ResourceNotFoundException;
+import com.assignment.springboot.dto.CategoryDTO;
 import com.assignment.springboot.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

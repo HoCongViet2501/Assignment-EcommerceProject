@@ -1,6 +1,6 @@
 package com.assignment.springboot.repository;
 
-import com.assignment.springboot.data.entity.Account;
+import com.assignment.springboot.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
