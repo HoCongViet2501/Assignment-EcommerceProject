@@ -1,6 +1,6 @@
 package com.assignment.springboot.repository;
 
-import com.assignment.springboot.data.entity.Category;
+import com.assignment.springboot.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

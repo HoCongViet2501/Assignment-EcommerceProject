@@ -1,7 +1,7 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.data.dto.CategoryDTO;
-import com.assignment.springboot.data.entity.Category;
+import com.assignment.springboot.dto.CategoryDTO;
+import com.assignment.springboot.entity.Category;
 import com.assignment.springboot.exception.ResourceNotFoundException;
 import com.assignment.springboot.repository.CategoryRepository;
 import com.assignment.springboot.service.impl.CategoryServiceImpl;

@@ -1,7 +1,6 @@
 package com.assignment.springboot.repository;
 
-import com.assignment.springboot.data.dto.CustomerDTO;
-import com.assignment.springboot.data.entity.Customer;
+import com.assignment.springboot.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

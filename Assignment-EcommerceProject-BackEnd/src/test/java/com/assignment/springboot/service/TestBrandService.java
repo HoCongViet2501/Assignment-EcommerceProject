@@ -1,7 +1,7 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.data.dto.BrandDTO;
-import com.assignment.springboot.data.entity.Brand;
+import com.assignment.springboot.dto.BrandDTO;
+import com.assignment.springboot.entity.Brand;
 import com.assignment.springboot.repository.BrandRepository;
 import com.assignment.springboot.service.impl.BrandServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,6 +1,6 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.data.dto.CategoryDTO;
+import com.assignment.springboot.dto.CategoryDTO;
 
 import java.util.List;
 

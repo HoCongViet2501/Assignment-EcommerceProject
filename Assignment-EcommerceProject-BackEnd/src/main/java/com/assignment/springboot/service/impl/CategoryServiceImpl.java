@@ -1,19 +1,15 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.data.dto.CategoryDTO;
-import com.assignment.springboot.data.entity.Category;
+import com.assignment.springboot.dto.CategoryDTO;
+import com.assignment.springboot.entity.Category;
 import com.assignment.springboot.exception.ResourceNotFoundException;
 import com.assignment.springboot.repository.CategoryRepository;
 import com.assignment.springboot.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

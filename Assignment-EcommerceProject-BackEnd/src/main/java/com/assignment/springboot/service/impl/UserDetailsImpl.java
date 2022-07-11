@@ -1,6 +1,6 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.data.entity.Account;
+import com.assignment.springboot.entity.Account;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

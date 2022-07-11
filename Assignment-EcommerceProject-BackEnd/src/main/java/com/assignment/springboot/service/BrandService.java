@@ -1,6 +1,6 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.data.dto.BrandDTO;
+import com.assignment.springboot.dto.BrandDTO;
 
 import java.util.List;
 

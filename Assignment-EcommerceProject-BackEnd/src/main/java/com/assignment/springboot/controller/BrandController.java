@@ -1,6 +1,6 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.data.dto.BrandDTO;
+import com.assignment.springboot.dto.BrandDTO;
 import com.assignment.springboot.service.BrandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

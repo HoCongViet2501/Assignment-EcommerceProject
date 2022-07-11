@@ -1,7 +1,7 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.data.dto.CustomerDTO;
-import com.assignment.springboot.data.entity.Customer;
+import com.assignment.springboot.dto.CustomerDTO;
+import com.assignment.springboot.entity.Customer;
 import com.assignment.springboot.exception.ResourceNotFoundException;
 import com.assignment.springboot.repository.CustomerRepository;
 import com.assignment.springboot.service.CustomerService;
