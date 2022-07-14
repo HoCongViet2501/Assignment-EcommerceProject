@@ -1,17 +1,18 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.CategoryDTO;
+import com.assignment.springboot.dto.request.CategoryDtoRequest;
+import com.assignment.springboot.dto.response.CategoryDtoResponse;
 
 import java.util.List;
 
 public interface CategoryService {
-    List<CategoryDTO> getCategories();
+    List<CategoryDtoResponse> getCategories();
+    
+    CategoryDtoResponse findCategoryByName(String name);
 
-    CategoryDTO findCategoryByName(String name);
+    void deleteCategory(long id);
 
-    void deleteCategory(int id);
-
-    CategoryDTO updateCategory(CategoryDTO categoryDTO, int id);
-
-    CategoryDTO createCategory(CategoryDTO categoryDTO);
+    CategoryDtoResponse updateCategory(CategoryDtoRequest categoryDtoResponse, long id);
+    
+    CategoryDtoResponse createCategory(CategoryDtoRequest categoryDTOCategoryDtoResponse);
 }

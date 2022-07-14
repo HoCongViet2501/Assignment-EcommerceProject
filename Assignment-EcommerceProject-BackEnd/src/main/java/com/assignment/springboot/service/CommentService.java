@@ -1,9 +1,10 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.CommentDTO;
+import com.assignment.springboot.dto.request.CommentDtoRequest;
+import com.assignment.springboot.dto.response.CommentDtoResponse;
 
 public interface CommentService {
-	CommentDTO saveComment(CommentDTO commentDTO);
-	CommentDTO updateComment(CommentDTO commentDTO,int id);
-	boolean deleteComment(int id);
+	CommentDtoResponse saveComment(CommentDtoRequest commentDtoRequest);
+	CommentDtoResponse updateComment(CommentDtoRequest commentDtoRequest, long id);
+	void deleteComment(long id);
 }

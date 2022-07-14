@@ -1,6 +1,7 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.dto.CommentDTO;
+import com.assignment.springboot.dto.request.CommentDtoRequest;
+import com.assignment.springboot.dto.response.CommentDtoResponse;
 import com.assignment.springboot.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,9 +21,9 @@ public class CommentController {
 	@PostMapping()
 	@Operation(summary = "create comment")
 	@ApiResponse(responseCode = "200", description = "created.comment")
-	public ResponseEntity<CommentDTO> createComment(@Valid @RequestBody CommentDTO commentDTO) {
-		commentService.saveComment(commentDTO);
-		return ResponseEntity.ok().body(commentDTO);
+	public ResponseEntity<CommentDtoResponse> createComment(@Valid @RequestBody CommentDtoRequest commentDtoRequest) {
+		CommentDtoResponse response=commentService.saveComment(commentDtoRequest);
+		return ResponseEntity.ok().body(response);
 	}
 	
 	@PutMapping("/{id}")
@@ -32,9 +33,9 @@ public class CommentController {
 			@ApiResponse(responseCode = "404", description = "not.found.comment")
 	}
 	)
-	public ResponseEntity<CommentDTO> updateComment(@Valid @RequestBody CommentDTO commentDTO, @PathVariable int id) {
-		commentService.updateComment(commentDTO, id);
-		return ResponseEntity.ok().body(commentDTO);
+	public ResponseEntity<CommentDtoResponse> updateComment(@Valid @RequestBody CommentDtoRequest commentDtoRequest, @PathVariable int id) {
+		CommentDtoResponse response=commentService.updateComment(commentDtoRequest, id);
+		return ResponseEntity.ok().body(response);
 	}
 	
 	@DeleteMapping("/{id}")

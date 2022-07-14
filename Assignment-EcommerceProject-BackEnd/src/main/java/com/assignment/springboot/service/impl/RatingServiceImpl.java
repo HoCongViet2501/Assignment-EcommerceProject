@@ -1,6 +1,7 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.RatingDTO;
+import com.assignment.springboot.dto.request.RatingDtoRequest;
+import com.assignment.springboot.dto.response.RatingDtoResponse;
 import com.assignment.springboot.entity.Rating;
 import com.assignment.springboot.exception.ResourceNotFoundException;
 import com.assignment.springboot.repository.RatingRepository;
@@ -8,6 +9,8 @@ import com.assignment.springboot.service.RatingService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class RatingServiceImpl implements RatingService {
@@ -21,17 +24,19 @@ public class RatingServiceImpl implements RatingService {
 	}
 	
 	@Override
-	public RatingDTO saveRating(RatingDTO ratingDTO) {
-		Rating rating = modelMapper.map(ratingDTO, Rating.class);
+	public RatingDtoResponse saveRating(RatingDtoRequest ratingDtoRequest) {
+		ratingDtoRequest.setCreatedDate(new Date());
+		Rating rating = modelMapper.map(ratingDtoRequest, Rating.class);
 		this.ratingRepository.save(rating);
-		return ratingDTO;
+		return modelMapper.map(rating, RatingDtoResponse.class);
 	}
 	
 	@Override
-	public RatingDTO updateRating(RatingDTO ratingDTO, int id) {
-		this.ratingRepository.findById(id).orElseThrow(
-				()->new ResourceNotFoundException("not.found.rating.have.id " +id));
-		this.ratingRepository.save(modelMapper.map(ratingDTO,Rating.class));
-		return ratingDTO;
+	public RatingDtoResponse updateRating(RatingDtoRequest ratingDtoRequest, long id) {
+		Rating rating = this.ratingRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("not.found.rating.have.id " + id));
+		modelMapper.map(ratingDtoRequest, rating);
+		this.ratingRepository.save(rating);
+		return modelMapper.map(rating, RatingDtoResponse.class);
 	}
 }

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Setter
 @Getter
 public class UserDetailsImpl implements UserDetails {
-	private int id;
+	private long id;
 	private String gmail;
 	@JsonIgnore
 	private String passWord;

@@ -1,6 +1,7 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.dto.RatingDTO;
+import com.assignment.springboot.dto.request.RatingDtoRequest;
+import com.assignment.springboot.dto.response.RatingDtoResponse;
 import com.assignment.springboot.service.RatingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,9 +23,9 @@ public class RatingController {
 			@ApiResponse(responseCode = "200", description = "create.success")
 	)
 	@Operation(summary = "create rating")
-	public ResponseEntity<RatingDTO> createRating(@Valid @RequestBody RatingDTO ratingDTO) {
-		ratingService.saveRating(ratingDTO);
-		return ResponseEntity.ok().body(ratingDTO);
+	public ResponseEntity<RatingDtoResponse> createRating(@Valid @RequestBody RatingDtoRequest ratingDtoRequest) {
+		RatingDtoResponse ratingDtoResponse = ratingService.saveRating(ratingDtoRequest);
+		return ResponseEntity.ok().body(ratingDtoResponse);
 	}
 	
 	@PutMapping("/{id}")
@@ -33,8 +34,8 @@ public class RatingController {
 			@ApiResponse(responseCode = "404", description = "not.found.rating.id")
 	})
 	@Operation(summary = "update rating")
-	public ResponseEntity<RatingDTO> updateRating(@Valid @RequestBody RatingDTO ratingDTO, @PathVariable int id) {
-		ratingService.updateRating(ratingDTO, id);
-		return ResponseEntity.ok().body(ratingDTO);
+	public ResponseEntity<RatingDtoResponse> updateRating(@Valid @RequestBody RatingDtoRequest ratingDtoRequest, @PathVariable int id) {
+		RatingDtoResponse ratingDtoResponse = ratingService.updateRating(ratingDtoRequest, id);
+		return ResponseEntity.ok().body(ratingDtoResponse);
 	}
 }

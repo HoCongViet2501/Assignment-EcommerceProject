@@ -12,8 +12,8 @@ import java.util.Objects;
 @Embeddable
 public class OrderDetailId implements Serializable {
     private static final long serialVersionUID = 4751710654285987677L;
-    private int orderId;
-    private int productId;
+    private long orderId;
+    private long productId;
 
     public OrderDetailId(int orderId, int productId) {
         this.orderId = orderId;

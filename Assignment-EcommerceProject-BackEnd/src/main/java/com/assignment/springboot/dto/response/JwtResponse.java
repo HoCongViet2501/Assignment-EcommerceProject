@@ -11,11 +11,11 @@ import java.util.List;
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer ";
-	private int id;
+	private long id;
 	private String email;
 	private List<String> roles;
 	
-	public JwtResponse(String token, int id, String email, List<String> roles) {
+	public JwtResponse(String token, long id, String email, List<String> roles) {
 		this.token = token;
 		this.id = id;
 		this.email = email;

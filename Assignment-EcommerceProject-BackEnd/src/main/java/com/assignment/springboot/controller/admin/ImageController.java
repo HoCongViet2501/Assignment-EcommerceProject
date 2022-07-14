@@ -1,6 +1,6 @@
-package com.assignment.springboot.controller;
+package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.ImageDTO;
+import com.assignment.springboot.dto.response.ImageDTO;
 import com.assignment.springboot.service.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

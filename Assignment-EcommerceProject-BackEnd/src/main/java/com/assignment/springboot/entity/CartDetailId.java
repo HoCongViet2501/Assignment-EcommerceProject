@@ -11,8 +11,8 @@ import java.util.Objects;
 @Getter
 @Embeddable
 public class CartDetailId implements Serializable {
-    private int productId;
-    private int sessionId;
+    private long productId;
+    private long sessionId;
 
     public CartDetailId(int productId, int sessionId) {
         this.productId = productId;

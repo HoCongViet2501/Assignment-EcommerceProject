@@ -1,5 +1,6 @@
 package com.assignment.springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,9 +17,9 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String name;
-    private String description;
+    private String volume;
     private float price;
     @Column(name = "quantity")
     private int quantity;
@@ -33,25 +34,31 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
     private String status;
+    private String gender;
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Rating> ratings;
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Image> images;
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CartDetail> cartDetails;
+    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails;
-
-    public Product(int id, String name, String description, float price, Date createdDate, Date updatedDate, Category category, Brand brand, String status) {
+    
+    public Product(long id, String name, String volume, float price, int quantity, Date createdDate, Date updatedDate, Category category, Brand brand, String status, String gender) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.volume = volume;
         this.price = price;
+        this.quantity = quantity;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.category = category;
         this.brand = brand;
         this.status = status;
+        this.gender = gender;
     }
-
 }
