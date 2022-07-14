@@ -18,15 +18,12 @@ import java.util.Set;
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	@Column(name = "password")
 	@Size(min = 6,max = 100)
 	@JsonIgnore
 	private String passWord;
 	private String gmail;
-	@OneToOne
-	@JoinColumn(name = "employee_id")
-	private Employee employee;
 	@OneToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
@@ -37,11 +34,10 @@ public class Account {
 	)
 	private Set<Role> roles=new HashSet<>();
 	
-	public Account(int id, String passWord, String gmail, Employee employee, Customer customer) {
+	public Account(int id, String passWord, String gmail, Customer customer) {
 		this.id = id;
 		this.passWord = passWord;
 		this.gmail = gmail;
-		this.employee = employee;
 		this.customer = customer;
 	}
 }

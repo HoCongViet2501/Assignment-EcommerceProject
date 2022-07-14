@@ -1,6 +1,7 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.CommentDTO;
+import com.assignment.springboot.dto.request.CommentDtoRequest;
+import com.assignment.springboot.dto.response.CommentDtoResponse;
 import com.assignment.springboot.entity.Comment;
 import com.assignment.springboot.exception.ResourceNotFoundException;
 import com.assignment.springboot.repository.CommentRepository;
@@ -9,6 +10,8 @@ import com.assignment.springboot.service.CommentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -23,25 +26,28 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public CommentDTO saveComment(CommentDTO commentDto) {
-		Comment comment=modelMapper.map(commentDto,Comment.class);
+	public CommentDtoResponse saveComment(CommentDtoRequest commentDtoRequest) {
+		commentDtoRequest.setCreatedDate(new Date());
+		commentDtoRequest.setUpdatedDate(new Date());
+		Comment comment=modelMapper.map(commentDtoRequest,Comment.class);
 		 this.commentRepository.save(comment);
-		 return commentDto;
+		 return modelMapper.map(comment,CommentDtoResponse.class);
 	}
 	
 	@Override
-	public CommentDTO updateComment(CommentDTO commentDTO, int id) {
-		this.commentRepository.findById(id).orElseThrow(
+	public CommentDtoResponse updateComment(CommentDtoRequest commentDtoRequest, long id) {
+		commentDtoRequest.setUpdatedDate(new Date());
+		Comment comment=this.commentRepository.findById(id).orElseThrow(
 				()->new ResourceNotFoundException("not.found.comment.id "+ id));
-		this.commentRepository.save(modelMapper.map(commentDTO,Comment.class));
-		return commentDTO;
+		modelMapper.map(commentDtoRequest,comment);
+		this.commentRepository.save(comment);
+		return modelMapper.map(comment,CommentDtoResponse.class);
 	}
 	
 	@Override
-	public boolean deleteComment(int id) {
+	public void deleteComment(long id) {
 		Comment comment=this.commentRepository.findById(id).orElseThrow(
 				()->new ResourceNotFoundException("not.found.comment.id "+ id));
 		this.commentRepository.delete(comment);
-		return true;
 	}
 }

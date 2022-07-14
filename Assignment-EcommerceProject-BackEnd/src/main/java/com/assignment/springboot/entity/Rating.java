@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.List;
 public class Rating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	@Column(name = "vote_star")
 	private int voteStar;
 	@ManyToOne
@@ -26,11 +27,14 @@ public class Rating {
 	private Product product;
 	@OneToMany(mappedBy = "rating", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Comment> comments;
+	@Column(name = "created_date")
+	private Date createdDate;
 	
-	public Rating(int id, int voteStar, Customer customer, Product product) {
+	public Rating(long id, int voteStar, Customer customer, Product product, Date createdDate) {
 		this.id = id;
 		this.voteStar = voteStar;
 		this.customer = customer;
 		this.product = product;
+		this.createdDate = createdDate;
 	}
 }

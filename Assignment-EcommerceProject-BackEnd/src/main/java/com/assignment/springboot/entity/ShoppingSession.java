@@ -19,7 +19,7 @@ public class ShoppingSession implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private long id;
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -30,7 +30,7 @@ public class ShoppingSession implements Serializable {
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CartDetail> cartDetails = new ArrayList<>();
 
-    public ShoppingSession(int id, Customer customer, Date createdDate, Date updatedDate) {
+    public ShoppingSession(long id, Customer customer, Date createdDate, Date updatedDate) {
         this.id = id;
         this.customer = customer;
         this.createdDate = createdDate;

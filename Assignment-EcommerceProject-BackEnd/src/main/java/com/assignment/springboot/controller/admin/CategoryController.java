@@ -1,6 +1,7 @@
-package com.assignment.springboot.controller;
+package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.CategoryDTO;
+import com.assignment.springboot.dto.request.CategoryDtoRequest;
+import com.assignment.springboot.dto.response.CategoryDtoResponse;
 import com.assignment.springboot.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,17 +25,17 @@ public class CategoryController {
 
     @GetMapping
     @Operation(summary = "get list category")
-    public ResponseEntity<List<CategoryDTO>> getCategories() {
-        List<CategoryDTO> listCategoryDto = this.categoryService.getCategories();
+    public ResponseEntity<List<CategoryDtoResponse>> getCategories() {
+        List<CategoryDtoResponse> listCategoryDto = this.categoryService.getCategories();
         return ResponseEntity.ok().body(listCategoryDto);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "create new category")
-    public ResponseEntity<CategoryDTO> createCategory(CategoryDTO categoryDto) {
-        this.categoryService.createCategory(categoryDto);
-        return ResponseEntity.ok().body(categoryDto);
+    public ResponseEntity<CategoryDtoResponse> createCategory(CategoryDtoRequest categoryDtoRequest) {
+        CategoryDtoResponse categoryDtoResponse= this.categoryService.createCategory(categoryDtoRequest);
+        return ResponseEntity.ok().body(categoryDtoResponse);
     }
 
     @DeleteMapping("/{id}")
@@ -50,13 +51,14 @@ public class CategoryController {
             @ApiResponse(responseCode = "200", description = "found.category.by.name"),
             @ApiResponse(responseCode = "404", description = "not.found.category")
     })
-    public ResponseEntity<CategoryDTO> getCategoryByName(@RequestParam String name) {
+    public ResponseEntity<CategoryDtoResponse> getCategoryByName(@RequestParam String name) {
         return ResponseEntity.ok().body(this.categoryService.findCategoryByName(name));
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "update category by id")
-    public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO categoryDto, @PathVariable int id) {
-        return ResponseEntity.ok().body(this.categoryService.updateCategory(categoryDto, id));
+    public ResponseEntity<CategoryDtoResponse> updateCategory(@RequestBody CategoryDtoRequest categoryDtoRequest, @PathVariable int id) {
+        CategoryDtoResponse categoryDtoResponse=this.categoryService.updateCategory(categoryDtoRequest, id);
+        return ResponseEntity.ok().body(categoryDtoResponse);
     }
 }

@@ -1,17 +1,18 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.BrandDTO;
+import com.assignment.springboot.dto.request.BrandDtoRequest;
+import com.assignment.springboot.dto.response.BrandDtoResponse;
 
 import java.util.List;
 
 public interface BrandService {
-    List<BrandDTO> getBrands();
+    List<BrandDtoResponse> getBrands();
 
-    BrandDTO createBrand(BrandDTO brand);
+    BrandDtoResponse createBrand(BrandDtoRequest brandDtoRequest);
 
-    BrandDTO findBrandByName(String name);
+    BrandDtoResponse findBrandByName(String name);
 
-    void deleteBrand(int id);
+    void deleteBrand(long id);
 
-    BrandDTO updateBrand(BrandDTO brandDTO, int id);
+    BrandDtoResponse updateBrand(BrandDtoRequest brandDto, long id);
 }

@@ -1,6 +1,6 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.ImageDTO;
+import com.assignment.springboot.dto.response.ImageDTO;
 import com.assignment.springboot.entity.Image;
 import com.assignment.springboot.entity.Product;
 import com.assignment.springboot.exception.ResourceNotFoundException;
@@ -28,14 +28,14 @@ public class ImageServiceImpl implements ImageService {
 	}
 	
 	@Override
-	public ImageDTO getImageByID(int id) {
+	public ImageDTO getImageByID(long id) {
 		Image image = this.imageRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("not.found.image.have.id " + id));
 		return modelMapper.map(image, ImageDTO.class);
 	}
 	
 	@Override
-	public ImageDTO createImage(int productId, MultipartFile multipartFile) throws IOException {
+	public ImageDTO createImage(long productId, MultipartFile multipartFile) throws IOException {
 		Image image = new Image();
 		Product product = productRepository.findById(productId).orElseThrow(() ->
 				new ResourceNotFoundException("not.found.product.have.id " + productId));
@@ -47,24 +47,24 @@ public class ImageServiceImpl implements ImageService {
 	}
 	
 	@Override
-	public ImageDTO updateImage(int id, MultipartFile multipartFile) throws IOException {
+	public void updateImage(long id, MultipartFile multipartFile) throws IOException {
 		Image image = this.imageRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("not.found.image.have.id " + id));
 		image.setFile(multipartFile.getBytes());
 		image.setFileType(multipartFile.getContentType());
 		this.imageRepository.save(image);
-		return modelMapper.map(image, ImageDTO.class);
+		modelMapper.map(image, ImageDTO.class);
 	}
 	
 	@Override
-	public void deleteImage(int id) {
+	public void deleteImage(long id) {
 		Image image = this.imageRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("not.found.image.have.id " + id));
 		this.imageRepository.delete(image);
 	}
 	
 	@Override
-	public ImageDTO getImageByProductId(int id) {
+	public ImageDTO getImageByProductId(long id) {
 		Image image = this.imageRepository.findImageByProductId(id);
 		if (image == null) {
 			throw new ResourceNotFoundException("not.found.image.have.productId " + id);

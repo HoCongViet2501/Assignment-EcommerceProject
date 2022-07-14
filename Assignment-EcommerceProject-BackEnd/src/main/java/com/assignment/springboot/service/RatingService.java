@@ -1,9 +1,10 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.RatingDTO;
+import com.assignment.springboot.dto.request.RatingDtoRequest;
+import com.assignment.springboot.dto.response.RatingDtoResponse;
 
 public interface RatingService {
-	RatingDTO saveRating(RatingDTO ratingDTO);
+	RatingDtoResponse saveRating(RatingDtoRequest ratingDTO);
 	
-	RatingDTO updateRating(RatingDTO ratingDTO, int id);
+	RatingDtoResponse updateRating(RatingDtoRequest ratingDTO, long id);
 }

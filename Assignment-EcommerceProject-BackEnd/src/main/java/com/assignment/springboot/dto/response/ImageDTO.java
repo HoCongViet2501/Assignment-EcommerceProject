@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto;
+package com.assignment.springboot.dto.response;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class ImageDTO {
-    private int id;
+    private long id;
     private String fileType;
     private byte[] file;
     private String url;

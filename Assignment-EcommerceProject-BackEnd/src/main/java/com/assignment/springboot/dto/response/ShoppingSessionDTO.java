@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto;
+package com.assignment.springboot.dto.response;
 
 import com.assignment.springboot.entity.Customer;
 import lombok.*;
@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ShoppingSessionDTO {
-    private int id;
+    private long id;
     private Customer customer;
     private Date createdDate;
     private Date updatedDate;

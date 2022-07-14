@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto;
+package com.assignment.springboot.dto.response;
 
 import lombok.*;
 
@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class CartDetailDTO {
-    private ProductDTO product;
+    private ProductDtoResponse product;
     private ShoppingSessionDTO session;
     private int amountProduct;
     private Date createdDate;

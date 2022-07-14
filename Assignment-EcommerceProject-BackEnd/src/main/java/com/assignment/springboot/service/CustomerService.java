@@ -1,17 +1,18 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.CustomerDTO;
+import com.assignment.springboot.dto.request.CustomerDtoRequest;
+import com.assignment.springboot.dto.response.CustomerDtoResponse;
 
 import java.util.List;
 
 public interface CustomerService {
-    List<CustomerDTO> getAllCustomer();
+    List<CustomerDtoResponse> getAllCustomer();
 
-    void deleteCustomer(int id);
+    void deleteCustomer(long id);
 
-    CustomerDTO updateCustomer(CustomerDTO customerDTO, int id);
+    CustomerDtoResponse updateCustomer(CustomerDtoRequest customerDtoRequest, long id);
+    
+    CustomerDtoResponse createCustomer(CustomerDtoRequest customerDtoRequest);
 
-    CustomerDTO createCustomer(CustomerDTO customerDTO);
-
-    CustomerDTO findCustomerByPhoneNumber(String phoneNumber);
+    CustomerDtoResponse findCustomerByPhoneNumber(String phoneNumber);
 }

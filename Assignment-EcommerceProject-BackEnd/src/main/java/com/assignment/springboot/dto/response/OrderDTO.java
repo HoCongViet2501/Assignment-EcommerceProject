@@ -1,7 +1,6 @@
-package com.assignment.springboot.dto;
+package com.assignment.springboot.dto.response;
 
 import com.assignment.springboot.entity.Customer;
-import com.assignment.springboot.entity.Employee;
 import lombok.*;
 
 import java.util.Date;
@@ -12,8 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class OrderDTO {
-    private Integer id;
-    private Employee employee;
+    private long id;
     private Customer customer;
     private String payment;
     private String status;
