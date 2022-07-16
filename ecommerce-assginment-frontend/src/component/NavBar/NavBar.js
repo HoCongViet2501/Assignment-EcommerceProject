@@ -5,8 +5,8 @@ import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faSignOutAlt, faUser, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
-// import {logout} from "../../actions/auth-actions";
-// import {fetchCart} from "../../actions/cart-actions";
+import {logout} from "../../actions/auth-actions";
+import {fetchCart} from "../../actions/cart-actions";
 import "./NavBar.css";
 
 class NavBar extends Component {
@@ -112,8 +112,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // logout: () => dispatch(logout()),
-        // fetchCart: () => dispatch(fetchCart())
+        logout: () => dispatch(logout()),
+        fetchCart: () => dispatch(fetchCart())
     }
 };
 

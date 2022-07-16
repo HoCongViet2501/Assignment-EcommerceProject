@@ -5,32 +5,31 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 
 import {IMG_URL} from "../../utils/constants/url";
-import {fetchPerfumes} from "../../actions/perfume-actions"
-import "./PerfumeCardsSlider.css";
+import {fetchProducts} from "../../actions/product-actions"
+import "./ProductCardsSlider.css";
 
-class PerfumeCardsSlider extends Component {
+class ProductCardsSlider extends Component {
     componentDidMount() {
-        this.props.fetchPerfumes();
+        this.props.fetchProducts();
     }
 
     addCarouselItems = (array, counter) => {
-        const perfumesId = [39, 56, 119, 59, 47, 95, 89, 98, 52, 40, 92, 99];
+        const productsId = [23, 24, 25, 27, 26, 28, 29, 30, 32, 22, 37, 36];
 
         return (
             <Carousel.Item>
                 <div className="card-deck">
-                    {array.map((perfume) => {
+                    {array.map((product) => {
                         for (let i = counter; i < counter + 4; i++) {
-                            if (perfume.id === perfumesId[i]) {
+                            if (product.id === productsId[i]) {
                                 return (
-                                    <div className="card" key={perfume.id}>
+                                    <div className="card" key={product.id}>
                                         <img className="d-block mx-auto w-50"
-                                             src={IMG_URL + `${perfume.filename}`}/>
+                                             src={IMG_URL + `${product.filename}`}/>
                                         <div className="card-body text-center">
-                                            <h5>{perfume.perfumeTitle}</h5>
-                                            <h6>{perfume.perfumer}</h6>
-                                            <h6>$<span>{perfume.price}</span>.00</h6>
-                                            <Link to={`/product/${perfume.id}`}>
+                                            <h5>{product.productName}</h5>
+                                            <h6>$<span>{product.price}</span>.00</h6>
+                                            <Link to={`/product/${product.id}`}>
                                             <span className="btn btn-dark">
                                                 SHOW MORE
                                             </span>
@@ -47,7 +46,7 @@ class PerfumeCardsSlider extends Component {
     }
 
     render() {
-        const {perfumes} = this.props;
+        const {products} = this.props;
         const settings = {controls: false}
 
         return (
@@ -58,9 +57,9 @@ class PerfumeCardsSlider extends Component {
                 <div className="container mt-5" id="indicators">
                     <form method="get" action="/">
                         <Carousel {...settings}>
-                            {this.addCarouselItems(perfumes, 0)}
-                            {this.addCarouselItems(perfumes, 4)}
-                            {this.addCarouselItems(perfumes, 8)}
+                            {this.addCarouselItems(products, 0)}
+                            {this.addCarouselItems(products, 4)}
+                            {this.addCarouselItems(products, 8)}
                         </Carousel>
                     </form>
                 </div>
@@ -69,13 +68,13 @@ class PerfumeCardsSlider extends Component {
     }
 }
 
-PerfumeCardsSlider.propTypes = {
-    fetchPerfumes: PropTypes.func.isRequired,
-    perfumes: PropTypes.array.isRequired
+ProductCardsSlider.propTypes = {
+    fetchProducts: PropTypes.func.isRequired,
+    products: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
-    perfumes: state.perfume.perfumes,
+    products: state.product.products,
 });
 
-export default connect(mapStateToProps, {fetchPerfumes})(PerfumeCardsSlider);
+export default connect(mapStateToProps, {fetchProducts})(ProductCardsSlider);

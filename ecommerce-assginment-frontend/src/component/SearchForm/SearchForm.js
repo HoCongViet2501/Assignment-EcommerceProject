@@ -13,12 +13,12 @@ const SearchForm = ({data, searchByData, setFilteredData, setSearching}) => {
         if (search.trim() !== '') {
             setSearching(true);
             const copiedData = [...data];
-            const filtered = copiedData.filter(perfumer => {
-                let searchKey = 'perfumer';
+            const filtered = copiedData.filter(category => {
+                let searchKey = 'category';
                 if (searchByData && searchByData.length > 0) {
                     searchKey = searchBy;
                 }
-                return perfumer[searchKey].toLowerCase().includes(search.trim().toLowerCase());
+                return category[searchKey].toLowerCase().includes(search.trim().toLowerCase());
             });
             setFilteredData(filtered);
         } else {

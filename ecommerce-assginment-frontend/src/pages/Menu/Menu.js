@@ -6,42 +6,38 @@ import PropTypes from "prop-types";
 import Checkbox from "../../component/CheckBox/Checkbox";
 import CheckboxRadio from "../../component/CheckboxRadio/CheckboxRadio";
 import MenuCards from "../../component/MenuCards/MenuCards";
-import {gender, perfumer, price} from "./MenuData";
-// import {
-//     fetchPerfumes,
-//     fetchPerfumesByPerfumer,
-//     fetchPerfumesByGender,
-//     fetchPerfumesByFilterParams
-// } from "../../actions/perfume-actions";
+import {brands, gender, price} from "./MenuData";
+import {
+    fetchProducts,
+    fetchProductsByBrand,
+    fetchProductsByGender,
+    fetchProductsByPrice,
+} from "../../actions/product-actions.js";
 import "./MenuStyle.css";
 
 class Menu extends Component {
     state = {
         filterParams: {
-            perfumers: [],
+            brands: [],
             genders: [],
             prices: []
         }
     };
 
     componentDidMount() {
-        const perfumeData = this.props.location.state.id;
+        const productData = this.props.location.state.id;
 
-        if (perfumeData === "female" || perfumeData === "male") {
-            this.props.fetchPerfumesByGender({perfumeGender: perfumeData});
+        if (productData === "Female" || productData === "Fale") {
+            this.props.fetchProductsByGender({productGender: productData});
             window.scrollTo(0, 0);
-        } else if (perfumeData === "all") {
-            this.props.fetchPerfumes();
+        } else if (productData === "all") {
+            this.props.fetchProducts();
             window.scrollTo(0, 0);
-        } else if (perfumeData) {
-            this.props.fetchPerfumesByPerfumer({perfumer: perfumeData});
+        } else if (productData) {
+            this.props.fetchProductsByBrand({brands: productData});
             window.scrollTo(0, 0);
         }
     }
-
-    getProducts = (variables) => {
-        this.props.fetchPerfumesByFilterParams(variables);
-    };
 
     handlePrice = (value) => {
         const data = price;
@@ -61,8 +57,7 @@ class Menu extends Component {
         newFilters[category] = filters
 
         if (category === "prices") {
-            let priceValues = this.handlePrice(filters)
-            newFilters[category] = priceValues
+            newFilters[category] = this.handlePrice(filters)
         }
 
         this.getProducts(newFilters)
@@ -70,19 +65,19 @@ class Menu extends Component {
     };
 
     render() {
-        const {perfumes} = this.props;
+        const {products} = this.props;
 
         return (
             <div className="container d-flex">
                 <nav id="sidebar">
                     <div className="sidebar-header">
-                        <h3>Perfumes</h3>
+                        <h3>Products</h3>
                     </div>
                     <ul className="list-unstyled components">
                         <h5>Brand</h5>
                         <li className="active mb-2" id="homeSubmenu">
-                            <Checkbox list={perfumer}
-                                      handleFilters={(filters) => this.handleFilters(filters, "perfumers")}/>
+                            <Checkbox list={brands}
+                                      handleFilters={(filters) => this.handleFilters(filters, "brands")}/>
                         </li>
                         <h5>Gender</h5>
                         <li className="active mb-2">
@@ -92,34 +87,34 @@ class Menu extends Component {
                         <h5>Price</h5>
                         <li className="active mb-2">
                             <CheckboxRadio list={price}
-                                           handleFilters={(filters) => this.handleFilters(filters, "prices")}/>
+                                        handleFilters={(filters) => this.handleFilters(filters, "prices")}/>
                         </li>
                     </ul>
                 </nav>
-                <Route exact component={() => <MenuCards data={perfumes} itemsPerPage={16} searchByData={[
-                    {label: 'Brand', value: 'perfumer'},
-                    {label: 'Perfume title', value: 'perfumeTitle'},
-                    {label: 'Manufacturer country', value: 'country'}]}/>}/>
+                <Route exact component={() => <MenuCards data={products} itemsPerPage={16} searchByData={[
+                    {label: 'Brand', value: 'brand'},
+                    {label: 'Category', value: 'category'},
+                    ]}/>}/>
             </div>
         );
     }
 }
 
 Menu.propTypes = {
-    fetchPerfumes: PropTypes.func.isRequired,
-    fetchPerfumesByPerfumer: PropTypes.func.isRequired,
-    fetchPerfumesByGender: PropTypes.func.isRequired,
-    fetchPerfumesByFilterParams: PropTypes.func.isRequired,
-    perfumes: PropTypes.array.isRequired
+    fetchProducts: PropTypes.func.isRequired,
+    fetchProductsByBrand: PropTypes.func.isRequired,
+    fetchProductsByGender: PropTypes.func.isRequired,
+    fetchProductsByPrice:PropTypes.func.isRequired,
+    products: PropTypes.array.isRequired
 };
 
-// const mapStateToProps = (state) => ({
-//     perfumes: state.perfume.perfumes,
-// });
+const mapStateToProps = (state) => ({
+    products: state.product.products,
+});
 
-// export default connect(mapStateToProps, {
-//     fetchPerfumes,
-//     fetchPerfumesByPerfumer,
-//     fetchPerfumesByGender,
-//     fetchPerfumesByFilterParams
-// })(Menu);
+export default connect(mapStateToProps, {
+    fetchProducts,
+    fetchProductsByGender,
+    fetchProductsByPrice,
+    fetchProductsByBrand,
+})(Menu);
