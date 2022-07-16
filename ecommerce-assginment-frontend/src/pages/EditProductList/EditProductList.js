@@ -2,28 +2,28 @@ import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import EditPerfumes from "./EditPerfumes";
-import {fetchPerfumes} from "../../actions/perfume-actions";
+import EditPerfumes from "./EditProducts";
+import {fetchProducts} from "../../actions/product-actions";
 
 class EditProductList extends Component {
 
     componentDidMount() {
-        this.props.fetchPerfumes();
+        this.props.fetchProducts();
     }
 
     render() {
-        const {perfumes} = this.props;
+        const {products} = this.props;
         const itemsPerPage = 24;
         const searchByData = [
-            {label: 'Brand', value: 'perfumer'},
-            {label: 'Perfume title', value: 'perfumeTitle'},
-            {label: 'Manufacturer country', value: 'country'},
-            {label: 'Gender', value: 'perfumeGender'}
+            {label: 'name', value: 'name'},
+            {label: 'brand', value: 'brandName'},
+            {label: 'category', value: 'categoryName'},
+            {label: 'Gender', value: 'gender'}
         ];
 
         return (
             <EditPerfumes
-                data={perfumes}
+                data={products}
                 itemsPerPage={itemsPerPage}
                 searchByData={searchByData}/>
         );
@@ -31,12 +31,12 @@ class EditProductList extends Component {
 }
 
 EditProductList.propTypes = {
-    fetchPerfumes: PropTypes.func.isRequired,
-    perfumes: PropTypes.array.isRequired
+    fetchProducts: PropTypes.func.isRequired,
+    products: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
     perfumes: state.perfume.perfumes
 });
 
-export default connect(mapStateToProps, {fetchPerfumes})(EditPerfumesList);
+export default connect(mapStateToProps, {fetchProducts})(EditProductList);

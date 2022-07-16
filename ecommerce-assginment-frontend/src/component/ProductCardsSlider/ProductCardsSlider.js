@@ -25,9 +25,9 @@ class ProductCardsSlider extends Component {
                                 return (
                                     <div className="card" key={product.id}>
                                         <img className="d-block mx-auto w-50"
-                                             src={IMG_URL + `${product.filename}`}/>
+                                             alt={IMG_URL + `${product.id}`}/>
                                         <div className="card-body text-center">
-                                            <h5>{product.productName}</h5>
+                                            <h5>{product.name}</h5>
                                             <h6>$<span>{product.price}</span>.00</h6>
                                             <Link to={`/product/${product.id}`}>
                                             <span className="btn btn-dark">
@@ -36,9 +36,10 @@ class ProductCardsSlider extends Component {
                                             </Link>
                                         </div>
                                     </div>
-                                )
+                                );
                             }
                         }
+                        return null;
                     })}
                 </div>
             </Carousel.Item>

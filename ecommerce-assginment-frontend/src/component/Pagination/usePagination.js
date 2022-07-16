@@ -17,7 +17,7 @@ const usePagination = (initialState) => {
             setCurrentPage(1);
             setSearching(false);
         }
-    }, [filteredData, currentPage]);
+    }, [filteredData, currentPage, perPage, searching]);
 
     let ellipsisLeft = false;
     let ellipsisRight = false;
