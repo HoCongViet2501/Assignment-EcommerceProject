@@ -18,8 +18,8 @@ const Footer = () => {
                         <a href="https://github.com/HoCongViet2501">
                             <i className="fab fa-linkedin fa-2x mr-3" style={{color: "white"}}></i>
                         </a>
-                        <a href='#'><i className="fab fa-facebook-f fa-2x mr-3" style={{color: "white"}}></i></a>
-                        <a href="#"><i className="fab fa-twitter fa-2x mr-3" style={{color: "white"}}></i></a>
+                        <a href='/#'><i className="fab fa-facebook-f fa-2x mr-3" style={{color: "white"}}></i></a>
+                        <a href="/#"><i className="fab fa-twitter fa-2x mr-3" style={{color: "white"}}></i></a>
                     </div>
                 </div>
                 <div className="mx-auto" style={{width: "200px"}}>

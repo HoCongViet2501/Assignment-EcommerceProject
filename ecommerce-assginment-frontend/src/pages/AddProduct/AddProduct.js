@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {faPlusSquare} from "@fortawesome/free-solid-svg-icons";
@@ -85,12 +85,12 @@ class AddProduct extends Component {
 
     render() {
         const {
-            name, volume, price, quantity, categoryId, brandId, status, gender, file, showToast
+            name, volume, price, quantity, categoryId, brandId, status, gender, showToast
         } = this.state;
 
         const {
             nameError, volumeError, quantityError, categoryIdError, brandIdError,
-            genderError, statusError, fileError, priceError
+            genderError, statusError, priceError
         } = this.props.errors;
 
         return (

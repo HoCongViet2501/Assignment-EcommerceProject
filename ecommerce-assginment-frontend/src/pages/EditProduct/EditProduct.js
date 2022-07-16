@@ -5,29 +5,25 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 
 import AccountNavbar from "../../component/AccountNavbar/AccountNavbar";
-import {IMG_URL} from "../../utils/constants/url";
-import {updateProduct, formReset} from "../../actions/admin-actions";
-import {fetchProducts} from "../../actions/Product-actions";
+import {updateProduct, formReset, fetchProductById} from "../../actions/admin-actions";
 
 class EditProduct extends Component {
     state = {
         id: "",
         name: "",
-        year: "",
-        country: "",
-        type: "",
         volume: "",
-        productGender: "",
-        fragranceTopNotes: "",
-        fragranceMiddleNotes: "",
-        fragranceBaseNotes: "",
         price: "",
-        filename: "",
+        quantity: "",
+        createdDate: "",
+        updatedDate: "",
+        categoryId: "",
+        brandId: "",
+        gender: "",
         file: null
     };
 
     componentDidMount() {
-        this.props.fetchProduct(this.props.match.params.id);
+        this.props.fetchProductById(this.props.match.params.id);
         this.props.formReset();
     }
 
@@ -41,27 +37,23 @@ class EditProduct extends Component {
         event.preventDefault();
 
         const {
-            id, productTitle, productr, year, country, type, volume, productGender, fragranceTopNotes, fragranceMiddleNotes,
-            fragranceBaseNotes, price, file
+            id,name, volume, price, quantity, createdDate, updatedDate, categoryId, brandId, gender
         } = this.state;
 
         const bodyFormData = new FormData();
 
-        bodyFormData.append("file", file);
         bodyFormData.append("id", id);
-        bodyFormData.append("perfumeTitle", perfumeTitle);
-        bodyFormData.append("perfumer", perfumer);
-        bodyFormData.append("year", year);
-        bodyFormData.append("country", country);
-        bodyFormData.append("type", type);
-        bodyFormData.append("volume", volume);
-        bodyFormData.append("perfumeGender", perfumeGender);
-        bodyFormData.append("fragranceTopNotes", fragranceTopNotes);
-        bodyFormData.append("fragranceMiddleNotes", fragranceMiddleNotes);
-        bodyFormData.append("fragranceBaseNotes", fragranceBaseNotes);
+        bodyFormData.append("name", name);
         bodyFormData.append("price", price);
+        bodyFormData.append("quantity", quantity);
+        bodyFormData.append("createdDate", createdDate);
+        bodyFormData.append("updatedDate", updatedDate);
+        bodyFormData.append("categoryId", categoryId);
+        bodyFormData.append("brandId", brandId);
+        bodyFormData.append("volume", volume);
+        bodyFormData.append("gender", gender);
 
-        this.props.updatePerfume(bodyFormData, this.props.history);
+        this.props.updateProduct(bodyFormData, this.props.history);
     };
 
     handleFileChange = (event) => {
@@ -80,14 +72,12 @@ class EditProduct extends Component {
 
     render() {
         const {
-            perfumeTitle, perfumer, year, country, type, volume, perfumeGender, fragranceTopNotes, fragranceMiddleNotes,
-            fragranceBaseNotes, price, filename
+            name, volume, price, quantity, categoryId, brandId, status, gender
         } = this.state;
 
         const {
-            perfumeTitleError, perfumerError, yearError, countryError, typeError, volumeError,
-            perfumeGenderError, fragranceTopNotesError, fragranceMiddleNotesError, fragranceBaseNotesError,
-            priceError
+            nameError, volumeError, quantityError, categoryIdError, brandIdError,
+            genderError, statusError, priceError
         } = this.props.errors;
 
         return (
@@ -97,20 +87,21 @@ class EditProduct extends Component {
                     <h4><FontAwesomeIcon className="mr-2" icon={faEdit}/>Edit perfume</h4>
                     <form onSubmit={this.onFormSubmit}>
                         <div className="col-md-5 mb-5 mt-5">
-                            <img src={IMG_URL + `${filename}`}
+                            <img alt=""
                                  className="rounded mx-auto w-100 mb-2"/>
                             <input type="file" name="file" onChange={this.handleFileChange}/>
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-2 col-form-label">Perfume title: </label>
+                            <label className="col-sm-2 col-form-label">Product name: </label>
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={perfumeTitleError ? "form-control is-invalid" : "form-control"}
-                                    name="perfumeTitle"
-                                    value={perfumeTitle}
+                                    className={nameError ? "form-control is-invalid" : "form-control"}
+                                    name="name"
+                                    value={name}
+                                    placeholder="Enter the product name"
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{perfumeTitleError}</div>
+                                <div className="invalid-feedback">{nameError}</div>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -118,11 +109,12 @@ class EditProduct extends Component {
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={perfumerError ? "form-control is-invalid" : "form-control"}
-                                    name="perfumer"
-                                    value={perfumer}
+                                    className={volumeError ? "form-control is-invalid" : "form-control"}
+                                    name="name"
+                                    value={volume}
+                                    placeholder="Enter the volume"
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{perfumerError}</div>
+                                <div className="invalid-feedback">{volumeError}</div>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -130,11 +122,12 @@ class EditProduct extends Component {
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={yearError ? "form-control is-invalid" : "form-control"}
-                                    name="year"
-                                    value={year}
+                                    className={priceError ? "form-control is-invalid" : "form-control"}
+                                    name="price"
+                                    value={price}
+                                    placeholder="Enter the price"
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{yearError}</div>
+                                <div className="invalid-feedback">{priceError}</div>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -142,11 +135,12 @@ class EditProduct extends Component {
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={countryError ? "form-control is-invalid" : "form-control"}
-                                    name="country"
-                                    value={country}
+                                    className={quantityError ? "form-control is-invalid" : "form-control"}
+                                    name="quantity"
+                                    value={quantity}
+                                    placeholder="Enter quantity"
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{countryError}</div>
+                                <div className="invalid-feedback">{quantityError}</div>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -154,11 +148,12 @@ class EditProduct extends Component {
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={typeError ? "form-control is-invalid" : "form-control"}
-                                    name="type"
-                                    value={type}
+                                    className={statusError ? "form-control is-invalid" : "form-control"}
+                                    name="status"
+                                    value={status}
+                                    placeholder="Enter status: "
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{typeError}</div>
+                                <div className="invalid-feedback">{status}</div>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -166,11 +161,12 @@ class EditProduct extends Component {
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={volumeError ? "form-control is-invalid" : "form-control"}
-                                    name="volume"
-                                    value={volume}
+                                    className={categoryIdError ? "form-control is-invalid" : "form-control"}
+                                    name="categoryID"
+                                    value={categoryId}
+                                    placeholder="Enter the category id"
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{volumeError}</div>
+                                <div className="invalid-feedback">{categoryId}</div>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -178,11 +174,12 @@ class EditProduct extends Component {
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={perfumeGenderError ? "form-control is-invalid" : "form-control"}
-                                    name="perfumeGender"
-                                    value={perfumeGender}
+                                    className={brandIdError ? "form-control is-invalid" : "form-control"}
+                                    name="brandID"
+                                    value={brandId}
+                                    placeholder="Enter the brand id"
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{perfumeGenderError}</div>
+                                <div className="invalid-feedback">{brandId}</div>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -190,47 +187,12 @@ class EditProduct extends Component {
                             <div className="col-sm-6">
                                 <input
                                     type="text"
-                                    className={fragranceTopNotesError ? "form-control is-invalid" : "form-control"}
-                                    name="fragranceTopNotes"
-                                    value={fragranceTopNotes}
+                                    className={genderError ? "form-control is-invalid" : "form-control"}
+                                    name="gender"
+                                    value={gender}
+                                    placeholder="Enter the gender"
                                     onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{fragranceTopNotesError}</div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label className="col-sm-2 col-form-label">Heart notes: </label>
-                            <div className="col-sm-6">
-                                <input
-                                    type="text"
-                                    className={fragranceMiddleNotesError ? "form-control is-invalid" : "form-control"}
-                                    name="fragranceMiddleNotes"
-                                    value={fragranceMiddleNotes}
-                                    onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{fragranceMiddleNotesError}</div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label className="col-sm-2 col-form-label">Base notes: </label>
-                            <div className="col-sm-6">
-                                <input
-                                    type="text"
-                                    className={fragranceBaseNotesError ? "form-control is-invalid" : "form-control"}
-                                    name="fragranceBaseNotes"
-                                    value={fragranceBaseNotes}
-                                    onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{fragranceBaseNotesError}</div>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label className="col-sm-2 col-form-label">Price: </label>
-                            <div className="col-sm-6">
-                                <input
-                                    type="text"
-                                    className={priceError ? "form-control is-invalid" : "form-control"}
-                                    name="price"
-                                    value={price}
-                                    onChange={this.handleInputChange}/>
-                                <div className="invalid-feedback">{priceError}</div>
+                                <div className="invalid-feedback">{genderError}</div>
                             </div>
                         </div>
                         <button type="submit" className="btn btn-dark">
@@ -243,25 +205,25 @@ class EditProduct extends Component {
     }
 }
 
-EditPerfume.propTypes = {
-    updatePerfume: PropTypes.func.isRequired,
-    fetchPerfume: PropTypes.func.isRequired,
+EditProduct.propTypes = {
+    updateProduct: PropTypes.func.isRequired,
+    fetchProduct: PropTypes.func.isRequired,
     formReset: PropTypes.func.isRequired,
     admin: PropTypes.object.isRequired,
-    perfume: PropTypes.object.isRequired
+    product: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
     errors: state.admin.errors,
-    perfume: state.perfume.perfume
+    product: state.product.product
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updatePerfume: (data, history) => dispatch(updatePerfume(data, history)),
-        fetchPerfume: (id) => dispatch(fetchPerfume(id)),
+        updateProduct: (data, history) => dispatch(updateProduct(data, history)),
+        fetchProduct: (id) => dispatch(fetchProductById(id)),
         formReset: () => dispatch(formReset())
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditPerfume);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProduct);

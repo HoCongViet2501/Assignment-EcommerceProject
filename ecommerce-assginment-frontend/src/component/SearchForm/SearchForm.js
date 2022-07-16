@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const SearchForm = ({data, searchByData, setFilteredData, setSearching}) => {
     const [search, setSearch] = useState('');
-    const [searchFor, setSearchFor] = useState('');
+    const [ setSearchFor] = useState('');
     const [searchBy, setSearchBy] = useState(searchByData && searchByData.length > 0 ? searchByData[0].value : '');
 
     const submitHandler = (event) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import usePagination from "../Pagination/usePagination";
-import PerfumeCardItem from "../PerfumeCardItem/PerfumeCardItem";
+import ProductCardItem from "../ProductCardItem/ProductCardItem";
 import PaginationItem from "../Pagination/PaginationItem";
 import SearchForm from "../SearchForm/SearchForm";
 
@@ -29,12 +29,12 @@ const MenuCards = ({data, itemsPerPage, startFrom, searchByData}) => {
                         changePage={changePage}
                         nextPage={nextPage}/>
                     <div className="row">
-                        {slicedData.map((perfume) => {
+                        {slicedData.map((product) => {
                             return (
-                                <PerfumeCardItem
-                                    perfume={perfume}
+                                <ProductCardItem
+                                    product={product}
                                     colSize={3}
-                                    link={"/product"}
+                                    link={"/products"}
                                     btnName={"SHOW MORE"}/>
                             );
                         })}

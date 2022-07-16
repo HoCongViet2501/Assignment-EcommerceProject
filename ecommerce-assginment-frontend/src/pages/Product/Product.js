@@ -58,7 +58,7 @@ class Product extends Component {
                 <div className="row">
                     <div className="col-md-5">
                         <div>
-                            <img src={IMG_URL + `${product.filename}`} className="rounded mx-auto w-100"/>
+                            <img alt={IMG_URL + `${product.filename}`} className="rounded mx-auto w-100"/>
                         </div>
                     </div>
                     <div className="col-md-7">

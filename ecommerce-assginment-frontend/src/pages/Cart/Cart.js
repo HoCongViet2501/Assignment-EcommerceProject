@@ -15,16 +15,16 @@ class Cart extends Component {
         this.props.fetchCart();
     }
 
-    deleteFromCart = (perfumeId) => {
-        const perfume = this.props.cartItems.find((perfume) => perfume.id === perfumeId);
+    deleteFromCart = (productId) => {
+        const product = this.props.cartItems.find((product) => product.id === productId);
 
-        this.props.removeFromCart(perfume);
+        this.props.removeFromCart(product);
     };
 
     render() {
         const {cartItems, loading} = this.props;
         let totalCartPrice = 0;
-        cartItems.map(perfume => totalCartPrice = totalCartPrice + perfume.price);
+        cartItems.map(product => totalCartPrice = totalCartPrice + product.price);
 
         return (
             <div className="container mt-5 pb-5">
@@ -38,26 +38,25 @@ class Cart extends Component {
                                 <p className="h4 mb-4 text-center">
                                     <FontAwesomeIcon className="mr-2" icon={faShoppingCart}/> Cart
                                 </p>
-                                {cartItems.map((perfume) => {
+                                {cartItems.map((product) => {
                                     return (
-                                        <div key={perfume.id} className="card mb-3 mx-auto" style={{maxWidth: "940px"}}>
+                                        <div key={product.id} className="card mb-3 mx-auto" style={{maxWidth: "940px"}}>
                                             <div className="row no-gutters">
                                                 <div className="col-3 ml-3 mt-3">
-                                                    <img src={IMG_URL + `${perfume.filename}`}
+                                                    <img alt={IMG_URL + `${product.filename}`}
                                                          className="rounded mx-auto w-50"/>
                                                 </div>
                                                 <div className="col-6">
                                                     <div className="card-body">
-                                                        <h4 className="card-title">{perfume.perfumer + " " + perfume.perfumeTitle}</h4>
-                                                        <p className="card-text">{perfume.type}</p>
-                                                        <p className="card-text"><span>{perfume.volume}</span> ml.</p>
+                                                        <h4 className="card-title">{product.name}</h4>
+                                                        <p className="card-text"><span>{product.volume}</span> ml.</p>
                                                     </div>
                                                 </div>
                                                 <div className="col-2">
                                                     <div className="card-body">
-                                                        <h5 className="card-title"><span>$ {perfume.price}</span></h5>
+                                                        <h5 className="card-title"><span>$ {product.price}</span></h5>
                                                         <button className="btn btn-warning mb-2"
-                                                                onClick={() => this.deleteFromCart(perfume.id)}>
+                                                                onClick={() => this.deleteFromCart(product.id)}>
                                                             <FontAwesomeIcon className="mr-2" icon={faMinusSquare}/> Remove
                                                         </button>
                                                     </div>

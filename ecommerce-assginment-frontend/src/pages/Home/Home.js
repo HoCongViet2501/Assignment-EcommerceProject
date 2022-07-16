@@ -3,7 +3,7 @@ import React from 'react';
 import HomePageTheme from "../../component/HomePageTheme/HomePageTheme";
 import CarouselImageSlider from "../../component/CarouselImageSlider/CarouselImageSlider";
 import SliderBrands from "../../component/SliderBrands/SliderBrands";
-import SliderCards from "../../component/PerfumeCardsSlider/PerfumeCardsSlider";
+import SliderCards from "../../component/ProductCardsSlider/ProductCardsSlider";
 
 const Home = () => {
     return (
