@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {IMG_URL} from "../../utils/constants/url";
 import Spinner from "../Spinner/Spinner";
 
-const PerfumeCardItem = ({perfume, colSize, link, btnName}) => {
+const PerfumeCardItem = ({product, colSize, link, btnName}) => {
     const [load, setLoad] = useState(false);
 
     return (
@@ -18,14 +18,13 @@ const PerfumeCardItem = ({perfume, colSize, link, btnName}) => {
                 <img onLoad={() => setLoad(true)}
                      className="mx-auto w-50"
                      style={{display: load ? "block" : "none"}}
-                     src={IMG_URL + `${perfume.filename}`}/>
+                     src={IMG_URL + `${product.id}`}/>
                 <div className="card-body text-center">
-                    <h5>{perfume.perfumeTitle}</h5>
-                    <h6>{perfume.perfumer}</h6>
-                    <h6><span>${perfume.price}</span>.00</h6>
+                    <h5>${product.productName}</h5>
+                    <h6><span>${product.price}</span>.00</h6>
                 </div>
                 <div className="text-center align-items-end mb-3">
-                    <Link to={`${link}/${perfume.id}`}>
+                    <Link to={`${link}/${product.id}`}>
                         <span className="btn btn-dark">{btnName}</span>
                     </Link>
                 </div>
