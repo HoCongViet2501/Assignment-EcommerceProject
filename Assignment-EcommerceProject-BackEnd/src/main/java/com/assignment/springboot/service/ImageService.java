@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 public interface ImageService {
-	ImageDTO getImageByID(long id);
 	ImageDTO createImage(long productId, MultipartFile multipartFile) throws IOException;
 	void updateImage(long id, MultipartFile multipartFile) throws IOException;
 	void deleteImage(long id);

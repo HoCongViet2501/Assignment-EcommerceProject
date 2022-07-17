@@ -28,13 +28,6 @@ public class ImageServiceImpl implements ImageService {
 	}
 	
 	@Override
-	public ImageDTO getImageByID(long id) {
-		Image image = this.imageRepository.findById(id).orElseThrow(
-				() -> new ResourceNotFoundException("not.found.image.have.id " + id));
-		return modelMapper.map(image, ImageDTO.class);
-	}
-	
-	@Override
 	public ImageDTO createImage(long productId, MultipartFile multipartFile) throws IOException {
 		Image image = new Image();
 		Product product = productRepository.findById(productId).orElseThrow(() ->

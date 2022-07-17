@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @Validated
-@RequestMapping("/api/brands")
+@RequestMapping("/api/admin/brands")
 public class BrandController {
 	private final BrandService brandService;
 	

@@ -27,8 +27,8 @@ public class ImageController {
 			@ApiResponse(responseCode = "200",description = "find.success"),
 			@ApiResponse(responseCode = "404",description = "not.found.image")
 	})
-	public ResponseEntity<ImageDTO> findImageById(@PathVariable int id) {
-		ImageDTO imageDto = imageService.getImageByID(id);
+	public ResponseEntity<ImageDTO> findImageByProductId(@PathVariable long id) {
+		ImageDTO imageDto = imageService.getImageByProductId(id);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION).body(imageDto);
 	}
 	@Operation(summary = "create image by productId")

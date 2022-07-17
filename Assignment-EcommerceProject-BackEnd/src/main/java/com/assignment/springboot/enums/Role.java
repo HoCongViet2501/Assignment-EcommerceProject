@@ -1,6 +1,6 @@
 package com.assignment.springboot.enums;
 
-public enum RoleName {
+public enum Role{
 	ADMIN,
 	CUSTOMER
 }

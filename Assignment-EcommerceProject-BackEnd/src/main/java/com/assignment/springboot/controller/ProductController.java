@@ -15,7 +15,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping("/category/{brandName}")
+	@GetMapping("/brand/{brandName}")
 	@Operation(summary = "get product by brandName")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "302", description = "found.product.by.brandName..success"),
