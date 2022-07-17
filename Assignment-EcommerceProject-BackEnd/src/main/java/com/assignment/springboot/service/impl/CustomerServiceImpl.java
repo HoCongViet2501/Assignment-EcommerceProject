@@ -2,7 +2,7 @@ package com.assignment.springboot.service.impl;
 
 import com.assignment.springboot.dto.request.CustomerDtoRequest;
 import com.assignment.springboot.dto.response.CustomerDtoResponse;
-import com.assignment.springboot.entity.Customer;
+import com.assignment.springboot.entity.User;
 import com.assignment.springboot.exception.ResourceNotFoundException;
 import com.assignment.springboot.repository.CustomerRepository;
 import com.assignment.springboot.service.CustomerService;
@@ -28,27 +28,27 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public List<CustomerDtoResponse> getAllCustomer() {
-		List<Customer> customers = this.customerRepository.findAll();
+		List<User> customers = this.customerRepository.findAll();
 		if (customers.isEmpty()) {
 			throw new ResourceNotFoundException("Can't.get.all.Customer");
 		}
 		return customers.stream().map(this::mapToDto).collect(Collectors.toList());
 	}
 	
-	private CustomerDtoResponse mapToDto(Customer customer) {
+	private CustomerDtoResponse mapToDto(User customer) {
 		return this.modelMapper.map(customer, CustomerDtoResponse.class);
 	}
 	
 	@Override
 	public void deleteCustomer(long id) {
-		Customer customer = this.customerRepository.findById(id).orElseThrow(
+		User customer = this.customerRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("can't.find.customer.have.id " + id));
 		this.customerRepository.delete(customer);
 	}
 	
 	@Override
 	public CustomerDtoResponse updateCustomer(CustomerDtoRequest customerDtoRequest, long id) {
-		Customer customer = this.customerRepository.findById(id).orElseThrow(
+		User customer = this.customerRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("can't.find.customer.have.id: " + id));
 		modelMapper.map(customerDtoRequest,customer);
 		this.customerRepository.save(customer);
@@ -57,7 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	public CustomerDtoResponse createCustomer(CustomerDtoRequest customerDtoRequest) {
-		Customer customer=this.modelMapper.map(customerDtoRequest, Customer.class);
+		User customer=this.modelMapper.map(customerDtoRequest, User.class);
 		this.customerRepository.save(customer);
 		return mapToDto(customer);
 	}
@@ -65,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public CustomerDtoResponse findCustomerByPhoneNumber(String phoneNumber) {
 		log.info("find.customer.by.phone.number");
-		Customer customer = this.customerRepository.findCustomerByPhoneNumber(phoneNumber);
+		User customer = this.customerRepository.findCustomerByPhoneNumber(phoneNumber);
 		if (customer == null) {
 			throw new ResourceNotFoundException("Can't.find.category.have.name : " + phoneNumber);
 		}

@@ -1,11 +1,13 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.entity.Account;
+import com.assignment.springboot.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,21 +18,21 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UserDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements UserDetails, UserDetailsService {
 	private long id;
 	private String gmail;
 	@JsonIgnore
 	private String passWord;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	public static UserDetailsImpl build(Account account) {
-		List<GrantedAuthority> grantedAuthorities = account.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
+	public static UserDetailsImpl build(User user) {
+		List<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority(role.name()))
 				.collect(Collectors.toList());
 		return new UserDetailsImpl(
-				account.getId(),
-				account.getGmail(),
-				account.getPassWord(),
+				user.getId(),
+				user.getGmail(),
+				user.getPassWord(),
 				grantedAuthorities);
 	}
 	
@@ -67,5 +69,10 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return null;
 	}
 }

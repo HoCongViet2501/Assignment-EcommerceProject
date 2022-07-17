@@ -2,7 +2,7 @@ package com.assignment.springboot.controller;
 
 import com.assignment.springboot.dto.request.LoginRequest;
 import com.assignment.springboot.dto.response.JwtResponse;
-import com.assignment.springboot.repository.AccountRepository;
+import com.assignment.springboot.repository.UserRepository;
 import com.assignment.springboot.service.impl.UserDetailsImpl;
 import com.assignment.springboot.security.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class AuthController {
 	AuthenticationManager authenticationManager;
 	JwtTokenUtil jwtTokenUtil;
 	@Autowired
-	AccountRepository accountRepository;
+	UserRepository accountRepository;
 	
-//	@Autowired
-//	public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil) {
-//		this.authenticationManager = authenticationManager;
-//		this.jwtTokenUtil = jwtTokenUtil;
-//	}
+	@Autowired
+	public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil) {
+		this.authenticationManager = authenticationManager;
+		this.jwtTokenUtil = jwtTokenUtil;
+	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody @Valid LoginRequest loginRequest) {
@@ -51,8 +51,4 @@ public class AuthController {
 				roles));
 	}
 	
-	@GetMapping("/test")
-	public ResponseEntity<?> getAccount(@RequestParam String gmail) {
-		return ResponseEntity.ok().body(accountRepository.findByGmail(gmail));
-	}
 }

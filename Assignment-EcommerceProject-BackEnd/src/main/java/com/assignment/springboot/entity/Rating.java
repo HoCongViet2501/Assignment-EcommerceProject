@@ -20,8 +20,8 @@ public class Rating {
 	@Column(name = "vote_star")
 	private int voteStar;
 	@ManyToOne
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
+	@JoinColumn(name = "user_id")
+	private User user;
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
@@ -30,10 +30,10 @@ public class Rating {
 	@Column(name = "created_date")
 	private Date createdDate;
 	
-	public Rating(long id, int voteStar, Customer customer, Product product, Date createdDate) {
+	public Rating(long id, int voteStar, User user, Product product, Date createdDate) {
 		this.id = id;
 		this.voteStar = voteStar;
-		this.customer = customer;
+		this.user = user;
 		this.product = product;
 		this.createdDate = createdDate;
 	}

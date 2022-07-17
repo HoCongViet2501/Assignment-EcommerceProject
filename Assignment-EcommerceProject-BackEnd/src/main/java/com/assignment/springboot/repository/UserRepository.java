@@ -1,12 +1,12 @@
 package com.assignment.springboot.repository;
 
-import com.assignment.springboot.entity.Account;
+import com.assignment.springboot.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long> {
-	Optional<Account> findByGmail(String gmail);
+public interface UserRepository extends JpaRepository<User, Long> {
+	Optional<User> findByGmail(String gmail);
 }
