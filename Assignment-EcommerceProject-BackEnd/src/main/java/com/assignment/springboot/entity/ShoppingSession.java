@@ -28,7 +28,7 @@ public class ShoppingSession implements Serializable {
 	@Column(name = "updated_date")
 	private Date updatedDate;
 	@OneToMany(mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<CartDetail> cartDetails = new ArrayList<>();
+	private List<CartDetails> cartDetails = new ArrayList<>();
 	
 	public ShoppingSession(long id, User user, Date createdDate, Date updatedDate) {
 		this.id = id;

@@ -62,7 +62,7 @@ class NavBar extends Component {
         return (
             <div>
                 <div id="header" className="container-fluid header-top d-none d-md-block pb-5 pt-5">
-                    <img alt="https://ibb.co/xMpb9vV" className="rounded mx-auto d-block"/>
+                    <img src="https://ibb.co/xMpb9vV" alt='' className="rounded mx-auto d-block"/>
                 </div>
                 <div className="container-fluid bg-black">
                     <nav id="navbar-main" className={`container navbar navbar-expand-lg bg-black text-white `}

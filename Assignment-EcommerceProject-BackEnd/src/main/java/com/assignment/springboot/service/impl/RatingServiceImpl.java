@@ -1,9 +1,9 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.request.RatingDtoRequest;
-import com.assignment.springboot.dto.response.RatingDtoResponse;
+import com.assignment.springboot.dto.requestdto.RatingDtoRequest;
+import com.assignment.springboot.dto.responsedto.RatingDtoResponse;
 import com.assignment.springboot.entity.Rating;
-import com.assignment.springboot.exception.ResourceNotFoundException;
+import com.assignment.springboot.exceptions.ResourceNotFoundException;
 import com.assignment.springboot.repository.RatingRepository;
 import com.assignment.springboot.service.RatingService;
 import org.modelmapper.ModelMapper;

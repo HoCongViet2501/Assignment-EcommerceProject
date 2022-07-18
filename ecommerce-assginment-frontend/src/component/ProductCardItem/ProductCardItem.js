@@ -18,7 +18,8 @@ const ProductCardItem = ({product, colSize, link, btnName}) => {
                 <img onLoad={() => setLoad(true)}
                      className="mx-auto w-50"
                      style={{display: load ? "block" : "none"}}
-                     alt={IMG_URL + `${product.id}`}/>
+                     src={IMG_URL + `${product.id}`}
+                     alt=''/>
                 <div className="card-body text-center">
                     <h5>${product.name}</h5>
                     <h6><span>${product.price}</span>.00</h6>

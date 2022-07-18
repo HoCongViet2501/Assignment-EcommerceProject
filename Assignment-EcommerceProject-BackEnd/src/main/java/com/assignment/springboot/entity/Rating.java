@@ -25,6 +25,7 @@ public class Rating {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+	
 	@OneToMany(mappedBy = "rating", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Comment> comments;
 	@Column(name = "created_date")

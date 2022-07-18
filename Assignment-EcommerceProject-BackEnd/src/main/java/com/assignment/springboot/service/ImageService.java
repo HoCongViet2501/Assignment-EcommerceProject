@@ -1,6 +1,6 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.response.ImageDTO;
+import com.assignment.springboot.dto.responsedto.ImageDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

@@ -5,10 +5,6 @@ import {
     LOGIN_FAILURE,
     REGISTER_FAILURE,
     LOGOUT_SUCCESS,
-    ACTIVATE_ACCOUNT_SUCCESS,
-    ACTIVATE_ACCOUNT_FAILURE,
-    RESET_PASSWORD_CODE_SUCCESS,
-    RESET_PASSWORD_CODE_FAILURE,
 } from "../utils/constants/actions-types";
 
 const initialState = {
@@ -35,24 +31,6 @@ const reducer = (state = initialState, action) => {
 
         case REGISTER_FAILURE:
             return {...state, errors: payload};
-
-        case ACTIVATE_ACCOUNT_SUCCESS:
-            return {...state, success: payload};
-
-        case ACTIVATE_ACCOUNT_FAILURE:
-            return {...state, error: payload};
-
-        case FORGOT_PASSWORD_SUCCESS:
-            return {...state, success: payload};
-
-        case FORGOT_PASSWORD_FAILURE:
-            return {...state, error: payload};
-
-        case RESET_PASSWORD_CODE_SUCCESS:
-            return {...state, user: payload};
-
-        case RESET_PASSWORD_CODE_FAILURE:
-            return {...state, error: payload};
 
         case LOGOUT_SUCCESS:
             return {...state, isLoggedIn: false, user: {}};

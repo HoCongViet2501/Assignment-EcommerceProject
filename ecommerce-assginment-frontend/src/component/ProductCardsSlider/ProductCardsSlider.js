@@ -24,8 +24,8 @@ class ProductCardsSlider extends Component {
                             if (product.id === productsId[i]) {
                                 return (
                                     <div className="card" key={product.id}>
-                                        <img className="d-block mx-auto w-50"
-                                             alt={IMG_URL + `${product.id}`}/>
+                                        <img className="d-block mx-auto w-50" src={IMG_URL + `${product.id}`}
+                                             alt=''/>
                                         <div className="card-body text-center">
                                             <h5>{product.name}</h5>
                                             <h6>$<span>{product.price}</span>.00</h6>

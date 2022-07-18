@@ -1,7 +1,7 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.request.CommentDtoRequest;
-import com.assignment.springboot.dto.response.CommentDtoResponse;
+import com.assignment.springboot.dto.requestdto.CommentDtoRequest;
+import com.assignment.springboot.dto.responsedto.CommentDtoResponse;
 
 public interface CommentService {
 	CommentDtoResponse saveComment(CommentDtoRequest commentDtoRequest);

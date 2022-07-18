@@ -43,7 +43,7 @@ class Cart extends Component {
                                         <div key={product.id} className="card mb-3 mx-auto" style={{maxWidth: "940px"}}>
                                             <div className="row no-gutters">
                                                 <div className="col-3 ml-3 mt-3">
-                                                    <img alt={IMG_URL + `${product.filename}`}
+                                                    <img alt={IMG_URL + `${product.id}`}
                                                          className="rounded mx-auto w-50"/>
                                                 </div>
                                                 <div className="col-6">

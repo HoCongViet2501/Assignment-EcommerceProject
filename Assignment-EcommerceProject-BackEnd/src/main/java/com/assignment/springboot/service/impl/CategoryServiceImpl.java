@@ -1,9 +1,9 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.request.CategoryDtoRequest;
-import com.assignment.springboot.dto.response.CategoryDtoResponse;
+import com.assignment.springboot.dto.requestdto.CategoryDtoRequest;
+import com.assignment.springboot.dto.responsedto.CategoryDtoResponse;
 import com.assignment.springboot.entity.Category;
-import com.assignment.springboot.exception.ResourceNotFoundException;
+import com.assignment.springboot.exceptions.ResourceNotFoundException;
 import com.assignment.springboot.repository.CategoryRepository;
 import com.assignment.springboot.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;

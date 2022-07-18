@@ -1,13 +1,13 @@
 package com.assignment.springboot.entity;
 
 import com.assignment.springboot.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -15,9 +15,9 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
+@EqualsAndHashCode(of = {"id", "userName"})
 @Table(name = "users")
-public class User implements Serializable {
+public class User  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -32,15 +32,19 @@ public class User implements Serializable {
 	
 	private String address;
 	
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Rating> ratings;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<ShoppingSession> shoppingSessions;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Order> orders;
 	
+	@JsonIgnore
 	@Column(name = "password")
 	private String passWord;
 	
@@ -48,4 +52,5 @@ public class User implements Serializable {
 	@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
 	private Set<Role> roles;
+	
 }

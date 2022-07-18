@@ -1,9 +1,9 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.request.CustomerDtoRequest;
-import com.assignment.springboot.dto.response.CustomerDtoResponse;
+import com.assignment.springboot.dto.requestdto.CustomerDtoRequest;
+import com.assignment.springboot.dto.responsedto.CustomerDtoResponse;
 import com.assignment.springboot.entity.User;
-import com.assignment.springboot.exception.ResourceNotFoundException;
+import com.assignment.springboot.exceptions.ResourceNotFoundException;
 import com.assignment.springboot.repository.CustomerRepository;
 import com.assignment.springboot.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;

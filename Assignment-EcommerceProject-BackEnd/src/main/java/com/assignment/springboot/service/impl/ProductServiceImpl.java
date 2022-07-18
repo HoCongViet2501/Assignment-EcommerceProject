@@ -1,12 +1,12 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.request.ProductDtoRequest;
-import com.assignment.springboot.dto.response.ProductDtoResponse;
-import com.assignment.springboot.dto.response.ProductsResponse;
+import com.assignment.springboot.dto.requestdto.ProductDtoRequest;
+import com.assignment.springboot.dto.responsedto.ProductDtoResponse;
+import com.assignment.springboot.dto.responsedto.ProductsResponse;
 import com.assignment.springboot.entity.Brand;
 import com.assignment.springboot.entity.Category;
 import com.assignment.springboot.entity.Product;
-import com.assignment.springboot.exception.ResourceNotFoundException;
+import com.assignment.springboot.exceptions.ResourceNotFoundException;
 import com.assignment.springboot.repository.BrandRepository;
 import com.assignment.springboot.repository.CategoryRepository;
 import com.assignment.springboot.repository.ProductRepository;

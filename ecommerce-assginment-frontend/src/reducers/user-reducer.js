@@ -1,7 +1,7 @@
 import {
     USER_UPDATED_SUCCESS,
-    USER_ADDED_REVIEW_SUCCESS,
-    USER_ADDED_REVIEW_FAILURE
+    USER_ADDED_RATING_SUCCESS,
+    USER_ADDED_RATING_FAILURE,
 } from "../utils/constants/actions-types";
 
 const initialState = {
@@ -16,10 +16,10 @@ const reducer = (state = initialState, action) => {
         case USER_UPDATED_SUCCESS:
             return {...state, success: true};
 
-        case USER_ADDED_REVIEW_SUCCESS:
+        case USER_ADDED_RATING_SUCCESS:
             return {...state, errors: {}};
 
-        case USER_ADDED_REVIEW_FAILURE:
+        case USER_ADDED_RATING_FAILURE:
             return {...state, errors: payload};
 
         default:

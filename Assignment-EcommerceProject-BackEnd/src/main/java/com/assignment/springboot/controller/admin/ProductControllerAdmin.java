@@ -1,7 +1,7 @@
 package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.request.ProductDtoRequest;
-import com.assignment.springboot.dto.response.ProductDtoResponse;
+import com.assignment.springboot.dto.requestdto.ProductDtoRequest;
+import com.assignment.springboot.dto.responsedto.ProductDtoResponse;
 import com.assignment.springboot.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,12 +9,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-//@PreAuthorize("hasAuthority('ADMIN')")
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/api/admin/products")
 public class ProductControllerAdmin {
 	@Autowired
