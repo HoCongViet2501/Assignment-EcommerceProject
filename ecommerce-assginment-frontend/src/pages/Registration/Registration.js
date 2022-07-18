@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -144,7 +143,7 @@ class Registration extends Component {
                             <FontAwesomeIcon className="mr-2" icon={faUserPlus}/>Sign up
                         </button>
                     </div>
-                    <ReCAPTCHA onChange={this.onChangeRecaptcha} sitekey="6Lc5cLkZAAAAAN8mFk85HQieB9toPcWFoW0RXCNR"/>
+                
                 </form>
             </div>
         );

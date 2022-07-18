@@ -40,13 +40,13 @@ public class Product {
     private List<Rating> ratings;
     @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Image> images;
+    private List<Images> images;
     @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CartDetail> cartDetails;
+    private List<CartDetails> cartDetails;
     @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderDetail> orderDetails;
+    private List<OrderDetails> orderDetails;
     
     public Product(long id, String name, String volume, float price, int quantity, Date createdDate, Date updatedDate, Category category, Brand brand, String status, String gender) {
         this.id = id;

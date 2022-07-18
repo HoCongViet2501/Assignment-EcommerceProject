@@ -1,7 +1,7 @@
 package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.request.BrandDtoRequest;
-import com.assignment.springboot.dto.response.BrandDtoResponse;
+import com.assignment.springboot.dto.requestdto.BrandDtoRequest;
+import com.assignment.springboot.dto.responsedto.BrandDtoResponse;
 import com.assignment.springboot.service.BrandService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @Validated
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/api/admin/brands")
 public class BrandController {
 	private final BrandService brandService;

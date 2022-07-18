@@ -1,7 +1,7 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.request.BrandDtoRequest;
-import com.assignment.springboot.dto.response.BrandDtoResponse;
+import com.assignment.springboot.dto.requestdto.BrandDtoRequest;
+import com.assignment.springboot.dto.responsedto.BrandDtoResponse;
 import com.assignment.springboot.entity.Brand;
 import com.assignment.springboot.repository.BrandRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +39,7 @@ public class TestBrandService {
 	@DisplayName("junit test for createBrand method")
 	@Test
 	public void createBrand_shouldReturnNewBrand() {
-		when(modelMapper.map(brandDtoRequest,Brand.class)).thenReturn(brand);
+		when(modelMapper.map(brandDtoRequest, Brand.class)).thenReturn(brand);
 		when(brandRepository.save(brand)).thenReturn(brand);
 		when(modelMapper.map(brand,BrandDtoResponse.class)).thenReturn(brandDtoResponse);
 		assertThat(brandServiceImpl.createBrand(brandDtoRequest)).isEqualTo(brandDtoResponse);

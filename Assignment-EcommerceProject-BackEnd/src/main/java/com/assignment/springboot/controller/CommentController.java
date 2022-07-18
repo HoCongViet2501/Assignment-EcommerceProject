@@ -1,7 +1,7 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.dto.request.CommentDtoRequest;
-import com.assignment.springboot.dto.response.CommentDtoResponse;
+import com.assignment.springboot.dto.requestdto.CommentDtoRequest;
+import com.assignment.springboot.dto.responsedto.CommentDtoResponse;
 import com.assignment.springboot.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

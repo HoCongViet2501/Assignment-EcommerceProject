@@ -1,6 +1,6 @@
 package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.response.ImageDTO;
+import com.assignment.springboot.dto.responsedto.ImageDTO;
 import com.assignment.springboot.service.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,12 +18,13 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/admin/image")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class ImageController {
 	@Autowired
 	private ImageService imageService;
 	
 	@GetMapping("/{id}")
-	@Operation(summary = "find image by imageId")
+	@Operation(summary = "find image by productId")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200",description = "find.success"),
 			@ApiResponse(responseCode = "404",description = "not.found.image")

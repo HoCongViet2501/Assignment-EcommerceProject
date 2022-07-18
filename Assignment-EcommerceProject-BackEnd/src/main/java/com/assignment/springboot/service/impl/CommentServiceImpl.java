@@ -1,9 +1,9 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.request.CommentDtoRequest;
-import com.assignment.springboot.dto.response.CommentDtoResponse;
+import com.assignment.springboot.dto.requestdto.CommentDtoRequest;
+import com.assignment.springboot.dto.responsedto.CommentDtoResponse;
 import com.assignment.springboot.entity.Comment;
-import com.assignment.springboot.exception.ResourceNotFoundException;
+import com.assignment.springboot.exceptions.ResourceNotFoundException;
 import com.assignment.springboot.repository.CommentRepository;
 import com.assignment.springboot.service.CommentService;
 
@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 	public CommentDtoResponse saveComment(CommentDtoRequest commentDtoRequest) {
 		commentDtoRequest.setCreatedDate(new Date());
 		commentDtoRequest.setUpdatedDate(new Date());
-		Comment comment=modelMapper.map(commentDtoRequest,Comment.class);
+		Comment comment=modelMapper.map(commentDtoRequest, Comment.class);
 		 this.commentRepository.save(comment);
 		 return modelMapper.map(comment,CommentDtoResponse.class);
 	}

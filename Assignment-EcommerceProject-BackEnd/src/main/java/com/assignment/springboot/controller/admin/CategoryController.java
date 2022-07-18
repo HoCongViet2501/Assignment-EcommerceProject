@@ -1,7 +1,7 @@
 package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.request.CategoryDtoRequest;
-import com.assignment.springboot.dto.response.CategoryDtoResponse;
+import com.assignment.springboot.dto.requestdto.CategoryDtoRequest;
+import com.assignment.springboot.dto.responsedto.CategoryDtoResponse;
 import com.assignment.springboot.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,11 +9,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/api/admin/categories")
 public class CategoryController {
     private final CategoryService categoryService;

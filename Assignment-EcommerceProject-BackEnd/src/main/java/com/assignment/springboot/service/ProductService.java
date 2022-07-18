@@ -1,8 +1,8 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.request.ProductDtoRequest;
-import com.assignment.springboot.dto.response.ProductDtoResponse;
-import com.assignment.springboot.dto.response.ProductsResponse;
+import com.assignment.springboot.dto.requestdto.ProductDtoRequest;
+import com.assignment.springboot.dto.responsedto.ProductDtoResponse;
+import com.assignment.springboot.dto.responsedto.ProductsResponse;
 
 public interface ProductService {
 	ProductsResponse getProductsByName(String productName, int page, int size);
