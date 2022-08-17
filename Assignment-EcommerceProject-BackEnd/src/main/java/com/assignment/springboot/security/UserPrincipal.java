@@ -22,16 +22,16 @@ public class UserPrincipal implements UserDetails {
 	public static UserPrincipal create(User user) {
 		String userRole = user.getRoles().iterator().next().toString();
 		List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));
-		return new UserPrincipal(user.getId(), user.getGmail(), user.getPassWord(), authorities);
+		return new UserPrincipal(user.getId(), user.getEmail(), user.getPassWord(), authorities);
 	}
 	@Override
 	public String getPassword() {
-		return null;
+		return this.password;
 	}
 	
 	@Override
 	public String getUsername() {
-		return null;
+		return this.gmail;
 	}
 	
 	@Override

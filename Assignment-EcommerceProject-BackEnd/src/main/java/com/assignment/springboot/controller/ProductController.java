@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("http:/localhost:3000/")
 @RequestMapping("/api/products")
 public class ProductController {
 	@Autowired
@@ -32,13 +33,13 @@ public class ProductController {
 			@ApiResponse(responseCode = "302", description = "found.product.by.categoryName.success"),
 			@ApiResponse(responseCode = "404", description = "not.found.product")
 	})
+	
 	@GetMapping("/category/{categoryName}")
 	public ResponseEntity<Object> getProductsByCategoryName(@PathVariable String categoryName
 			, @RequestParam(defaultValue = "0", value = "page", required = false) int page
 			, @RequestParam(defaultValue = "12", value = "size", required = false) int size) {
 		return ResponseEntity.status(HttpStatus.FOUND).body(productService.getProductsByCategoryName(categoryName, page, size));
 	}
-	
 	@Operation(summary = "get product by gender")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "302", description = "found.product.by.gender.success"),

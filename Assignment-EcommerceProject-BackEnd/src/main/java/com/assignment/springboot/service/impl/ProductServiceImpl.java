@@ -1,8 +1,8 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.requestdto.ProductDtoRequest;
-import com.assignment.springboot.dto.responsedto.ProductDtoResponse;
-import com.assignment.springboot.dto.responsedto.ProductsResponse;
+import com.assignment.springboot.dto.request.ProductDtoRequest;
+import com.assignment.springboot.dto.response.ProductDtoResponse;
+import com.assignment.springboot.dto.response.ProductsPagingResponse;
 import com.assignment.springboot.entity.Brand;
 import com.assignment.springboot.entity.Category;
 import com.assignment.springboot.entity.Product;
@@ -40,8 +40,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ProductsResponse getProductsByName(String productName, int page, int size) {
-		Pageable pageable = PageRequest.of(page, size);
+	public ProductsPagingResponse getProductsByName(String productName, int page, int size) {
+		Pageable pageable = PageRequest.of(page, size );
 		Page<Product> productPage = this.productRepository.findProductsByNameContainingIgnoreCaseOrderByPriceAsc(productName, pageable);
 		if (productPage.isEmpty()) {
 			throw new ResourceNotFoundException("not.found.any.product");
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ProductsResponse getAllProductOrderByPriceAsc(int page, int size) {
+	public ProductsPagingResponse getAllProductOrderByPriceAsc(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Product> productPage = this.productRepository.findAllByOrderByPriceAsc(pageable);
 		return getContentPage(productPage);
@@ -64,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ProductsResponse getProductsByGender(String gender, int page, int size) {
+	public ProductsPagingResponse getProductsByGender(String gender, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Product> productPage = this.productRepository.findProductsByGenderOrderByPriceAsc(gender, pageable);
 		if (productPage.isEmpty()) {
@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ProductsResponse getProductsByBrandName(String brandName, int page, int size) {
+	public ProductsPagingResponse getProductsByBrandName(String brandName, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Product> productPage = this.productRepository.findProductsByBrand_Name(brandName, pageable);
 		if (productPage.isEmpty()) {
@@ -84,7 +84,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ProductsResponse getProductsByCategoryName(String categoryName, int page, int size) {
+	public ProductsPagingResponse getProductsByCategoryName(String categoryName, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Product> productPage = this.productRepository.findProductsByCategory_Name(categoryName, pageable);
 		if (productPage.isEmpty()) {
@@ -122,11 +122,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ProductsResponse filterProductByPrice(float startPrice, float endPrice, int page, int size) {
-		Pageable pageable=PageRequest.of(page,size);
-		Page<Product> productPage=this.productRepository.findProductByPriceBetweenOrderByPriceDesc(startPrice,endPrice,pageable);
+	public ProductsPagingResponse filterProductByPrice(float startPrice, float endPrice, int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Product> productPage = this.productRepository.findProductByPriceBetweenOrderByPriceDesc(startPrice, endPrice, pageable);
 		if (productPage.isEmpty()) {
-			throw new ResourceNotFoundException("not.found.product.have.price.between."+startPrice+".and."+endPrice);
+			throw new ResourceNotFoundException("not.found.product.have.price.between." + startPrice + ".and." + endPrice);
 		}
 		return getContentPage(productPage);
 	}
@@ -146,15 +146,14 @@ public class ProductServiceImpl implements ProductService {
 		return product;
 	}
 	
-	private ProductsResponse getContentPage(Page<Product> productPage) {
+	private ProductsPagingResponse getContentPage(Page<Product> productPage) {
 		List<ProductDtoResponse> productDtoResponses = productPage.getContent().stream()
 				.map(this::mapToDto).collect(Collectors.toList());
-		return ProductsResponse.builder().productDtos(productDtoResponses)
+		return ProductsPagingResponse.builder().productDtos(productDtoResponses)
 				.pageNo(productPage.getNumber())
 				.pageSize(productPage.getSize())
 				.totalElements(productPage.getNumberOfElements())
 				.totalPages(productPage.getTotalPages())
-				.last(productPage.isLast())
 				.build();
 	}
 }

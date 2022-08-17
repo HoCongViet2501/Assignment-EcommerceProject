@@ -15,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"id", "userName"})
+@EqualsAndHashCode(of = {"id", "userName","passWord"})
 @Table(name = "users")
 public class User  {
 	@Id
@@ -25,7 +25,7 @@ public class User  {
 	@Column(name = "user_name")
 	private String userName;
 	
-	private String gmail;
+	private String email;
 	
 	@Column(name = "phone_number")
 	private String phoneNumber;
@@ -44,7 +44,6 @@ public class User  {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Order> orders;
 	
-	@JsonIgnore
 	@Column(name = "password")
 	private String passWord;
 	

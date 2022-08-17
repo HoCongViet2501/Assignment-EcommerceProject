@@ -1,8 +1,7 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.requestdto.RatingDtoRequest;
-import com.assignment.springboot.dto.requestdto.RegisterRequest;
-import com.assignment.springboot.dto.requestdto.UserDtoRequest;
+import com.assignment.springboot.dto.request.RatingDtoRequest;
+import com.assignment.springboot.dto.request.UserDtoRequest;
 import com.assignment.springboot.entity.Product;
 import com.assignment.springboot.entity.Rating;
 import com.assignment.springboot.entity.User;
@@ -52,7 +51,7 @@ public class UserServiceImpl implements  UserService {
 	
 	@Override
 	public boolean addUser(UserDtoRequest userDtoRequest) {
-		User user = userRepository.findByGmail(userDtoRequest.getGmail()).orElseThrow(
+		User user = userRepository.findByEmail(userDtoRequest.getGmail()).orElseThrow(
 				() -> new ResourceNotFoundException("not.found.productId")
 		);
 		user.setPassWord(passwordEncoder.encode(userDtoRequest.getPassWord()));
@@ -73,21 +72,20 @@ public class UserServiceImpl implements  UserService {
 	
 	@Override
 	public User findByEmail(String email) {
-		return userRepository.findByGmail(email).orElseThrow(
+		return userRepository.findByEmail(email).orElseThrow(
 				() -> new UsernameNotFoundException("not.found.email"));
 	}
 	
 	@Override
-	public RegisterRequest registerUser(RegisterRequest registerRequest) {
-		if (registerRequest.getPassword() != null && !registerRequest.getPassword().equals(registerRequest.getPasswordConfirm())) {
+	public void registerUser(UserDtoRequest registerRequest) {
+		if (registerRequest.getPassWord() == null) {
 			throw new PasswordException("password.do.not.match");
-		} else if (userRepository.findByGmail(registerRequest.getEmail()).isPresent()) {
+		} else if (userRepository.findByEmail(registerRequest.getGmail()).isPresent()) {
 			throw new EmailException("email.already.exist");
 		}
 		User user = modelMapper.map(registerRequest, User.class);
 		user.setRoles(Collections.singleton(Role.CUSTOMER));
-		user.setPassWord(passwordEncoder.encode(user.getPassWord()));
+		user.setPassWord(passwordEncoder.encode(registerRequest.getPassWord()));
 		userRepository.save(user);
-		return registerRequest;
 	}
 }

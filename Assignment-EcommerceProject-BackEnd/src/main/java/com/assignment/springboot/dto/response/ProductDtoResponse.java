@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto.responsedto;
+package com.assignment.springboot.dto.response;
 
 import lombok.*;
 
@@ -32,4 +32,11 @@ public class ProductDtoResponse {
 	
 	private String gender;
 	
+	public ProductDtoResponse(long id, String name, String volume, float price, int quantity) {
+		this.id = id;
+		this.name = name;
+		this.volume = volume;
+		this.price = price;
+		this.quantity = quantity;
+	}
 }

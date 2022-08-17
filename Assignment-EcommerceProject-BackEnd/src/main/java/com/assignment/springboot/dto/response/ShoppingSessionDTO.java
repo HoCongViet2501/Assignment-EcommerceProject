@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto.responsedto;
+package com.assignment.springboot.dto.response;
 
 import com.assignment.springboot.entity.User;
 import lombok.*;
@@ -10,11 +10,9 @@ import java.util.Date;
 @EqualsAndHashCode
 @NoArgsConstructor
 @ToString
-public class OrderDTO {
+public class ShoppingSessionDTO {
     private long id;
     private User customer;
-    private String payment;
-    private String status;
     private Date createdDate;
     private Date updatedDate;
 }

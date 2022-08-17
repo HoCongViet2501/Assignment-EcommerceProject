@@ -1,8 +1,7 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.requestdto.RatingDtoRequest;
-import com.assignment.springboot.dto.requestdto.RegisterRequest;
-import com.assignment.springboot.dto.requestdto.UserDtoRequest;
+import com.assignment.springboot.dto.request.RatingDtoRequest;
+import com.assignment.springboot.dto.request.UserDtoRequest;
 import com.assignment.springboot.entity.User;
 
 import java.util.List;
@@ -17,5 +16,5 @@ public interface UserService {
 	
 	User findByEmail(String email);
 	
-	RegisterRequest registerUser(RegisterRequest registerRequest);
+	void registerUser(UserDtoRequest userDtoRequest);
 }

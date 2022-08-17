@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto.responsedto;
+package com.assignment.springboot.dto.response;
 
 import lombok.*;
 

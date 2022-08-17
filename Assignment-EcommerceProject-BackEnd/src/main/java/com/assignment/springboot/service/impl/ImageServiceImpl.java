@@ -1,6 +1,6 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.responsedto.ImageDTO;
+import com.assignment.springboot.dto.response.ImageDTO;
 import com.assignment.springboot.entity.Images;
 import com.assignment.springboot.entity.Product;
 import com.assignment.springboot.exceptions.ResourceNotFoundException;

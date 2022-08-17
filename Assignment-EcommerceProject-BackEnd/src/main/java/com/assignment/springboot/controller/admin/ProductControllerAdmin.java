@@ -1,7 +1,7 @@
 package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.requestdto.ProductDtoRequest;
-import com.assignment.springboot.dto.responsedto.ProductDtoResponse;
+import com.assignment.springboot.dto.request.ProductDtoRequest;
+import com.assignment.springboot.dto.response.ProductDtoResponse;
 import com.assignment.springboot.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
