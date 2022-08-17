@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto.requestdto;
+package com.assignment.springboot.dto.request;
 
 import lombok.*;
 

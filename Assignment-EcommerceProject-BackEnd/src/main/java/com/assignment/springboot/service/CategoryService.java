@@ -1,7 +1,7 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.requestdto.CategoryDtoRequest;
-import com.assignment.springboot.dto.responsedto.CategoryDtoResponse;
+import com.assignment.springboot.dto.request.CategoryDtoRequest;
+import com.assignment.springboot.dto.response.CategoryDtoResponse;
 
 import java.util.List;
 

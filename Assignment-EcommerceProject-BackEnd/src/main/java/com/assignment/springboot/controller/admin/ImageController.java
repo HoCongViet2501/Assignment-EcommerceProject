@@ -1,6 +1,6 @@
 package com.assignment.springboot.controller.admin;
 
-import com.assignment.springboot.dto.responsedto.ImageDTO;
+import com.assignment.springboot.dto.response.ImageDTO;
 import com.assignment.springboot.service.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,8 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/admin/image")
 @PreAuthorize("hasAuthority('ADMIN')")
+@RequestMapping("/api/admin/image")
 public class ImageController {
 	@Autowired
 	private ImageService imageService;

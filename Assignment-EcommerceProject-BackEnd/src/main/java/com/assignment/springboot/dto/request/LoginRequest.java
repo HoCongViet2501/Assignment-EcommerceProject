@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto.requestdto;
+package com.assignment.springboot.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class LoginRequest {
 	@NotNull(message = "required")
 	@Email
 	@Length(min = 10,max = 50)
-	private String gmail;
+	private String email;
 	@NotNull(message = "required")
 	@Length(min = 4,max = 50)
 	private String password;

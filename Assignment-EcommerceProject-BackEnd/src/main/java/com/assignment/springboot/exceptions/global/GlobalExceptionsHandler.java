@@ -1,5 +1,9 @@
-package com.assignment.springboot.exceptions;
+package com.assignment.springboot.exceptions.global;
 
+import com.assignment.springboot.exceptions.EmailException;
+import com.assignment.springboot.exceptions.ErrorResponse;
+import com.assignment.springboot.exceptions.ForbiddenException;
+import com.assignment.springboot.exceptions.PasswordException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +39,7 @@ public class GlobalExceptionsHandler {
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler({PasswordException.class})
+	@ExceptionHandler({EmailException.class})
 	public ResponseEntity<Object> emailExistException(Exception e, WebRequest request) {
 		ErrorResponse errorResponse = new ErrorResponse(new Date(), e.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);

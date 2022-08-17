@@ -1,4 +1,4 @@
-package com.assignment.springboot.dto.responsedto;
+package com.assignment.springboot.dto.response;
 
 import lombok.*;
 
@@ -9,8 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductsResponse {
-	
+public class ProductsPagingResponse {
 	
 	private int pageNo;
 	
@@ -20,7 +19,6 @@ public class ProductsResponse {
 	
 	private int totalPages;
 	
-	private boolean last;
-	
 	private List<ProductDtoResponse> productDtos;
+	
 }

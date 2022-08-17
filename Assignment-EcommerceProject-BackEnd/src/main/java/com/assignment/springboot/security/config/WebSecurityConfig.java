@@ -18,34 +18,35 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
 	private final JwtConfigurer jwtConfigurer;
+	
 	@Autowired
 	public WebSecurityConfig(JwtConfigurer jwtConfigurer) {
 		this.jwtConfigurer = jwtConfigurer;
 	}
-
+	
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(8);
 	}
-
+	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		http.cors().and().csrf().disable().authorizeRequests().and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
 				.authorizeRequests()
-				.antMatchers( "/swagger-ui.html", "/swagger-ui/**", "/api-docs/**").permitAll()
-				.antMatchers("/api/auth/login").permitAll()
-				.antMatchers("/api/admin/*","/api/**").permitAll()
+				.antMatchers("/swagger-ui.html", "/swagger-ui/**", "/api-docs/**").permitAll()
+				.antMatchers("/api/auth/**").permitAll()
+				.antMatchers("/api/admin/*", "/api/**").permitAll()
 				.anyRequest().authenticated()
 				.and().apply(jwtConfigurer);
-		
 	}
 }

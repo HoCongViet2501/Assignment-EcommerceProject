@@ -1,7 +1,7 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.dto.requestdto.RatingDtoRequest;
-import com.assignment.springboot.dto.responsedto.RatingDtoResponse;
+import com.assignment.springboot.dto.request.RatingDtoRequest;
+import com.assignment.springboot.dto.response.RatingDtoResponse;
 import com.assignment.springboot.service.RatingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
