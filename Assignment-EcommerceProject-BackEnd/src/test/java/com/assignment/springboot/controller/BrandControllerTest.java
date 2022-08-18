@@ -1,8 +1,8 @@
 package com.assignment.springboot.controller;
 
 import com.assignment.springboot.controller.admin.BrandController;
-import com.assignment.springboot.dto.requestdto.BrandDtoRequest;
-import com.assignment.springboot.dto.responsedto.BrandDtoResponse;
+import com.assignment.springboot.dto.request.BrandDtoRequest;
+import com.assignment.springboot.dto.response.BrandDtoResponse;
 import com.assignment.springboot.service.BrandService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
