@@ -1,21 +1,17 @@
 package com.assignment.springboot.dto.request;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class UserDtoRequest {
 	@NotNull(message = "username.is.required")
 	private String userName;
-	
-	@NotNull(message = "gmail.is.required")
-	private String gmail;
-	
-	private String phoneNumber;
-	
-	private String address;
-	
+
 	@NotNull(message = "password.is.required")
 	private String passWord;
 }

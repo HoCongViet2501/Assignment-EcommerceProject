@@ -1,7 +1,7 @@
 package com.assignment.springboot.service;
 
-import com.assignment.springboot.dto.requestdto.BrandDtoRequest;
-import com.assignment.springboot.dto.responsedto.BrandDtoResponse;
+import com.assignment.springboot.dto.request.BrandDtoRequest;
+import com.assignment.springboot.dto.response.BrandDtoResponse;
 
 import java.util.List;
 

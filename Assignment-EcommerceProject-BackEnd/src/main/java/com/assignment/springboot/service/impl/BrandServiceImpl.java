@@ -1,7 +1,7 @@
 package com.assignment.springboot.service.impl;
 
-import com.assignment.springboot.dto.requestdto.BrandDtoRequest;
-import com.assignment.springboot.dto.responsedto.BrandDtoResponse;
+import com.assignment.springboot.dto.request.BrandDtoRequest;
+import com.assignment.springboot.dto.response.BrandDtoResponse;
 import com.assignment.springboot.entity.Brand;
 import com.assignment.springboot.exceptions.ResourceNotFoundException;
 import com.assignment.springboot.repository.BrandRepository;

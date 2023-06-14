@@ -1,7 +1,8 @@
 package com.assignment.springboot.controller;
 
-import com.assignment.springboot.dto.requestdto.LoginRequest;
-import com.assignment.springboot.dto.requestdto.RegisterRequest;
+
+import com.assignment.springboot.dto.request.LoginRequest;
+import com.assignment.springboot.dto.request.UserDtoRequest;
 import com.assignment.springboot.entity.User;
 import com.assignment.springboot.security.jwt.JwtProvider;
 import com.assignment.springboot.service.UserService;
@@ -42,14 +43,14 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<?> authenticate(@RequestBody LoginRequest request) {
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getGmail(), request.getPassword()));
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 			
-			User user = userService.findByEmail(request.getGmail());
+			User user = userService.findByEmail(request.getEmail());
 			String userRole = user.getRoles().iterator().next().name();
-			String token = jwtProvider.createToken(request.getGmail(), userRole);
+			String token = jwtProvider.createToken(request.getEmail(), userRole);
 			
 			Map<Object, Object> response = new HashMap<>();
-			response.put("email", request.getGmail());
+			response.put("email", request.getEmail());
 			response.put("token", token);
 			response.put("userRole", userRole);
 			
@@ -60,12 +61,12 @@ public class AuthController {
 		}
 	}
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest, BindingResult bindingResult){
+	public ResponseEntity<?> register(@Valid @RequestBody UserDtoRequest userDtoRequest, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
 			return ResponseEntity.badRequest().build();
 		}
-		userService.registerUser(registerRequest);
-		return ResponseEntity.status(HttpStatus.CREATED).body(registerRequest);
+		userService.registerUser(userDtoRequest);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	@PostMapping("/logout")
 	public void logout(HttpServletRequest request, HttpServletResponse response) {

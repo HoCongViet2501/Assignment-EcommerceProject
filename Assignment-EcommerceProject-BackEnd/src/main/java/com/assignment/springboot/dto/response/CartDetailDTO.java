@@ -1,5 +1,7 @@
-package com.assignment.springboot.dto.responsedto;
+package com.assignment.springboot.dto.response;
 
+import com.assignment.springboot.dto.response.ProductDtoResponse;
+import com.assignment.springboot.dto.response.ShoppingSessionDTO;
 import lombok.*;
 
 import java.util.Date;

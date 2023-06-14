@@ -9,8 +9,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class UserResponse {
-	private long id;
-	
 	private String userName;
 	
 	private String gmail;

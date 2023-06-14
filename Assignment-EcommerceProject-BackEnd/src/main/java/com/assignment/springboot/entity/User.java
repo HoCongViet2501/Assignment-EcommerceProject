@@ -2,10 +2,7 @@ package com.assignment.springboot.entity;
 
 import com.assignment.springboot.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"id", "userName","passWord"})
+@AllArgsConstructor
 @Table(name = "users")
 public class User  {
 	@Id
