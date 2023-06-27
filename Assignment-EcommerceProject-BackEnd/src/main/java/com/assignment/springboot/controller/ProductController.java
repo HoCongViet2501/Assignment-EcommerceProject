@@ -19,7 +19,7 @@ public class ProductController {
 	@GetMapping("/brand/{brandName}")
 	@Operation(summary = "get product by brandName")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "302", description = "found.product.by.brandName..success"),
+			@ApiResponse(responseCode = "302", description = "found.product.by.brandName.success"),
 			@ApiResponse(responseCode = "404", description = "not.found.product")
 	})
 	public ResponseEntity<Object> getProductsByBrandName(@PathVariable String brandName

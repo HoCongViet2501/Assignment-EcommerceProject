@@ -19,8 +19,8 @@ public class User  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "user_name")
-	private String userName;
+	@Column(name = "username")
+	private String username;
 	
 	private String email;
 	
@@ -29,24 +29,18 @@ public class User  {
 	
 	private String address;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Rating> ratings;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<ShoppingSession> shoppingSessions;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Order> orders;
 	
-	@Column(name = "password")
-	private String passWord;
+	private String password;
 	
-	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-	@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
-	private Set<Role> roles;
+	private Role role;
 	
 }

@@ -16,5 +16,4 @@ public interface UserService {
 	
 	User findByEmail(String email);
 	
-	void registerUser(UserDtoRequest userDtoRequest);
 }

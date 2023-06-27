@@ -9,15 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class UserResponse {
+
 	private String userName;
-	
-	private String gmail;
-	
-	private String phoneNumber;
-	
-	private String address;
-	
-	private String passWord;
-	
-	private Set<Role> roles;
+
 }

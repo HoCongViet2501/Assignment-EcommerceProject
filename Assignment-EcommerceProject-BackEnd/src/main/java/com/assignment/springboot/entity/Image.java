@@ -10,16 +10,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "images")
-public class Images {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "file_type")
-    private String fileType;
+
+    @Column(name = "file_url")
+    private String fileUrl;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-    private byte[] file;
-
 
 }

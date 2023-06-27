@@ -14,11 +14,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginRequest {
-	@NotNull(message = "required")
-	@Email
-	@Length(min = 10,max = 50)
-	private String email;
-	@NotNull(message = "required")
-	@Length(min = 4,max = 50)
-	private String password;
+    @NotNull(message = "required")
+    @Length(min = 10, max = 50)
+    private String username;
+
+    @NotNull(message = "required")
+    @Length(min = 4, max = 50)
+    private String password;
 }

@@ -10,17 +10,17 @@ import java.util.Objects;
 @Setter
 @Getter
 @Embeddable
-public class OrderDetailsId implements Serializable {
+public class OrderDetailId implements Serializable {
     private static final long serialVersionUID = 4751710654285987677L;
     private long orderId;
     private long productId;
 
-    public OrderDetailsId(int orderId, int productId) {
+    public OrderDetailId(int orderId, int productId) {
         this.orderId = orderId;
         this.productId = productId;
     }
 
-    public OrderDetailsId() {
+    public OrderDetailId() {
 
     }
 
@@ -28,7 +28,7 @@ public class OrderDetailsId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderDetailsId that = (OrderDetailsId) o;
+        OrderDetailId that = (OrderDetailId) o;
         return orderId == that.orderId && productId == that.productId;
     }
 

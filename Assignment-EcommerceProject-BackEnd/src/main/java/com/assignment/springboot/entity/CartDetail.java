@@ -10,10 +10,10 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "card_detail")
-public class CartDetails {
+public class CartDetail {
 
     @EmbeddedId
-    private CartDetailIds cartDetailId;
+    private CartDetailId cartDetailId;
     @MapsId("productId")
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -30,14 +30,14 @@ public class CartDetails {
     private Date updatedDate;
 
 
-    public CartDetails(CartDetailIds cartDetailId, int amountProduct, Date createdDate, Date updatedDate) {
+    public CartDetail(CartDetailId cartDetailId, int amountProduct, Date createdDate, Date updatedDate) {
         this.cartDetailId = cartDetailId;
         this.amountProduct = amountProduct;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
     }
 
-    public CartDetails() {
+    public CartDetail() {
 
     }
 }

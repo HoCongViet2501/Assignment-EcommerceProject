@@ -1,7 +1,7 @@
 package com.assignment.springboot.service.impl;
 
 import com.assignment.springboot.dto.response.ImageDTO;
-import com.assignment.springboot.entity.Images;
+import com.assignment.springboot.entity.Image;
 import com.assignment.springboot.entity.Product;
 import com.assignment.springboot.exceptions.ResourceNotFoundException;
 import com.assignment.springboot.repository.ImageRepository;
@@ -29,36 +29,32 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Override
 	public ImageDTO createImage(long productId, MultipartFile multipartFile) throws IOException {
-		Images image = new Images();
+		Image image = new Image();
 		Product product = productRepository.findById(productId).orElseThrow(() ->
 				new ResourceNotFoundException("not.found.product.have.id " + productId));
 		image.setProduct(product);
-		image.setFileType(multipartFile.getContentType());
-		image.setFile(multipartFile.getBytes());
 		this.imageRepository.save(image);
 		return modelMapper.map(image, ImageDTO.class);
 	}
 	
 	@Override
 	public void updateImage(long id, MultipartFile multipartFile) throws IOException {
-		Images image = this.imageRepository.findById(id).orElseThrow(
+		Image image = this.imageRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("not.found.image.have.id " + id));
-		image.setFile(multipartFile.getBytes());
-		image.setFileType(multipartFile.getContentType());
 		this.imageRepository.save(image);
 		modelMapper.map(image, ImageDTO.class);
 	}
 	
 	@Override
 	public void deleteImage(long id) {
-		Images image = this.imageRepository.findById(id).orElseThrow(
+		Image image = this.imageRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("not.found.image.have.id " + id));
 		this.imageRepository.delete(image);
 	}
 	
 	@Override
 	public ImageDTO getImageByProductId(long id) {
-		Images image = this.imageRepository.findImageByProductId(id);
+		Image image = this.imageRepository.findImageByProductId(id);
 		if (image == null) {
 			throw new ResourceNotFoundException("not.found.image.have.productId " + id);
 		}

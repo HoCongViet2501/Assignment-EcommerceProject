@@ -10,8 +10,12 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class UserDtoRequest {
 	@NotNull(message = "username.is.required")
-	private String userName;
+	private String username;
 
 	@NotNull(message = "password.is.required")
-	private String passWord;
+	private String password;
+
+	@NotNull(message = "password.is.required")
+	private String passwordConfirm;
+
 }

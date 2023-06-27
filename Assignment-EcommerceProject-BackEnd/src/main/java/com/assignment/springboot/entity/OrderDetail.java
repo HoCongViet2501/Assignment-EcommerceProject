@@ -12,9 +12,9 @@ import java.util.Date;
 @Setter
 @Getter
 @NoArgsConstructor
-public class OrderDetails {
+public class OrderDetail {
     @EmbeddedId
-    private OrderDetailsId orderDetailId;
+    private OrderDetailId orderDetailId;
     @MapsId("orderId")
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -33,7 +33,7 @@ public class OrderDetails {
     @Column(name = "updated_date")
     private Date updatedDate;
 
-    public OrderDetails(OrderDetailsId orderDetailId, int amountProduct, float price, float totalMoney, Date createdDate, Date updatedDate) {
+    public OrderDetail(OrderDetailId orderDetailId, int amountProduct, float price, float totalMoney, Date createdDate, Date updatedDate) {
         this.orderDetailId = orderDetailId;
         this.amountProduct = amountProduct;
         this.price = price;

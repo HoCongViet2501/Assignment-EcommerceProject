@@ -14,8 +14,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	
 	Page<Product> findProductsByGenderOrderByPriceAsc(String gender, Pageable pageable);
 	
-	Page<Product> findProductsByBrand_Name(String brandName, Pageable pageable);
+	Page<Product> findProductsByBrandName(String brandName, Pageable pageable);
 	
-	Page<Product> findProductsByCategory_Name(String categoryName, Pageable pageable);
+	Page<Product> findProductsByCategoryName(String categoryName, Pageable pageable);
 	Page<Product> findProductByPriceBetweenOrderByPriceDesc(float startPrice,float endPrice,Pageable pageable);
 }

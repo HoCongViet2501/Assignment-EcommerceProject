@@ -76,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductsPagingResponse getProductsByBrandName(String brandName, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<Product> productPage = this.productRepository.findProductsByBrand_Name(brandName, pageable);
+		Page<Product> productPage = this.productRepository.findProductsByBrandName(brandName, pageable);
 		if (productPage.isEmpty()) {
 			throw new ResourceNotFoundException("not.found.product.have.brand.name." + brandName);
 		}
@@ -86,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductsPagingResponse getProductsByCategoryName(String categoryName, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<Product> productPage = this.productRepository.findProductsByCategory_Name(categoryName, pageable);
+		Page<Product> productPage = this.productRepository.findProductsByCategoryName(categoryName, pageable);
 		if (productPage.isEmpty()) {
 			throw new ResourceNotFoundException("not.found.product.have.category.name." + categoryName);
 		}

@@ -10,16 +10,16 @@ import java.util.Objects;
 @Setter
 @Getter
 @Embeddable
-public class CartDetailIds implements Serializable {
+public class CartDetailId implements Serializable {
     private long productId;
     private long sessionId;
 
-    public CartDetailIds(int productId, int sessionId) {
+    public CartDetailId(int productId, int sessionId) {
         this.productId = productId;
         this.sessionId = sessionId;
     }
 
-    public CartDetailIds() {
+    public CartDetailId() {
 
     }
 
@@ -27,7 +27,7 @@ public class CartDetailIds implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CartDetailIds that = (CartDetailIds) o;
+        CartDetailId that = (CartDetailId) o;
         return productId == that.productId && sessionId == that.sessionId;
     }
 
