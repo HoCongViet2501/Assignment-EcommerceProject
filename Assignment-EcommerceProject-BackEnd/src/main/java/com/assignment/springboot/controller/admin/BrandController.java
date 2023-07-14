@@ -63,7 +63,7 @@ public class BrandController {
 	})
 	public ResponseEntity<String> deleteBrand(@PathVariable long id) {
 		brandService.deleteBrand(id);
-		return ResponseEntity.ok().body("Delete.success.brand.have.id " + id);
+		return ResponseEntity.ok().body("Delete success brand have id " + id);
 	}
 	
 	@PutMapping("/{id}")

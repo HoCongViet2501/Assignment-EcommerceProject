@@ -5,6 +5,7 @@ import com.assignment.springboot.service.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,59 +20,44 @@ import java.io.IOException;
 @RestController
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/api/admin/image")
+@Log4j2
 public class ImageController {
-	@Autowired
-	private ImageService imageService;
-	
-	@GetMapping("/{id}")
-	@Operation(summary = "find image by productId")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200",description = "find.success"),
-			@ApiResponse(responseCode = "404",description = "not.found.image")
-	})
-	public ResponseEntity<ImageDTO> findImageByProductId(@PathVariable long id) {
-		ImageDTO imageDto = imageService.getImageByProductId(id);
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION).body(imageDto);
-	}
-	@Operation(summary = "create image by productId")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200",description = "created.success"),
-			@ApiResponse(responseCode = "404",description = "not.found.product")
-	})
-	@PostMapping(value = "/{idProduct}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<?> createNewImage(@PathVariable int idProduct, @RequestParam("file") MultipartFile multipartFile) {
-		ImageDTO imageDTO = null;
-		try {
-			imageDTO = imageService.createImage(idProduct, multipartFile);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/admin/image")
-				.path(imageDTO.getId() + "").toUriString();
-		imageDTO.setUrl(url);
-		return ResponseEntity.ok().body(imageDTO);
-	}
-	@Operation(summary = "update image ")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200",description = "updated.success"),
-			@ApiResponse(responseCode = "404",description = "not.found.image")
-	})
-	@PutMapping(value = "/{id}",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-	public ResponseEntity<String> updateNewImage(@PathVariable int id, @RequestParam("file") MultipartFile multipartFile) throws IOException {
-		imageService.updateImage(id,multipartFile);
-		return ResponseEntity.ok().body("updated.success.image.have.id "+id);
-	}
-	
-	@DeleteMapping("/{id}")
-	@Operation(summary = "delete image by imageId")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200",description = "deleted.success"),
-			@ApiResponse(responseCode = "404",description = "not.found.image")
-	})
-	public ResponseEntity<String> removeImage(@PathVariable int id) {
-		imageService.deleteImage(id);
-		return ResponseEntity.ok().body("deleted.success");
-	}
-	
-	
+    @Autowired
+    private ImageService imageService;
+
+    @GetMapping("/{id}")
+    @Operation(summary = "find image by productId")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "find.success"),
+            @ApiResponse(responseCode = "404", description = "not.found.image")
+    })
+    public ResponseEntity<ImageDTO> findImageByProductId(@PathVariable long id) {
+        ImageDTO imageDto = imageService.getImageByProductId(id);
+        return ResponseEntity.ok().body(imageDto);
+    }
+
+    @Operation(summary = "create image by productId")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "image uploaded"),
+            @ApiResponse(responseCode = "404", description = "not.found.product"),
+            @ApiResponse(responseCode = "400", description = "bad.request")
+    })
+    @PostMapping(value = "/upload", consumes = "multipart/form-data")
+    public ResponseEntity<Object> uploadImage(@RequestParam Long idProduct, @RequestParam("file") MultipartFile file) throws Exception {
+        log.info("upload image: {}", file.getOriginalFilename());
+        return ResponseEntity.ok().body(this.imageService.upload(file, idProduct));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "delete image by imageId")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "deleted.success"),
+            @ApiResponse(responseCode = "404", description = "not.found.image")
+    })
+    public ResponseEntity<String> removeImage(@PathVariable int id) {
+        imageService.deleteImage(id);
+        return ResponseEntity.ok().body("delete image successfully");
+    }
+
+
 }
