@@ -12,9 +12,9 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ProductDtoRequest {
-	private long id;
 	@NotNull(message = "please.fill.name.of.product")
 	private String name;
+
 	@NotNull(message = "please.fill.name.of.volume")
 	private String volume;
 	
@@ -27,10 +27,6 @@ public class ProductDtoRequest {
 	private Date createdDate;
 	
 	private Date updatedDate;
-	
-	private long categoryId;
-	
-	private long brandId;
 	
 	@NotNull(message = "please.fill.status.of.product")
 	private String status;

@@ -19,6 +19,6 @@ public class ProductsPagingResponse {
 	
 	private int totalPages;
 	
-	private List<ProductDtoResponse> productDtos;
+	private List<ProductDtoResponse> productDTOs;
 	
 }

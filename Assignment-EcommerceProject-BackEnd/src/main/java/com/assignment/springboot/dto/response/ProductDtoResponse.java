@@ -10,8 +10,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ProductDtoResponse {
-	private long id;
-	
 	private String name;
 	
 	private String volume;
@@ -31,12 +29,5 @@ public class ProductDtoResponse {
 	private String status;
 	
 	private String gender;
-	
-	public ProductDtoResponse(long id, String name, String volume, float price, int quantity) {
-		this.id = id;
-		this.name = name;
-		this.volume = volume;
-		this.price = price;
-		this.quantity = quantity;
-	}
+
 }
