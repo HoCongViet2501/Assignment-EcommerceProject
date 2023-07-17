@@ -31,6 +31,5 @@ public class ProductDtoRequest {
 	@NotNull(message = "please.fill.status.of.product")
 	private String status;
 	
-	@NotNull(message = "please.fill.name.of.product")
 	private String gender;
 }

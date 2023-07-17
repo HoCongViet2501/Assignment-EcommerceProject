@@ -58,6 +58,7 @@ public class ImageServiceImpl implements ImageService {
             image.setProduct(this.productRepository.findById(productId).orElseThrow(
                     () -> new ResourceNotFoundException("not found product")
             ));
+            this.imageRepository.save(image);
             return ImageDTO.builder()
                     .id(image.getId())
                     .url(image.getFileUrl())

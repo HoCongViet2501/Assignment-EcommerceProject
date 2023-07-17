@@ -1,5 +1,6 @@
 package com.assignment.springboot.entity;
 
+import com.assignment.springboot.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +44,7 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    private String status;
+    private Status status;
 
     private String gender;
 
