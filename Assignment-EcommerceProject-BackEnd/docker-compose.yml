@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  app:
+    image: 'assignment:latest'
+    build:
+      context: .
+      container_name: myapp
+      depends_on:
+        - postgresqldb
+      ports:
+        - 8085:8085
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresqldb:5432/flightbed
+        - SPRING_DATASOURCE_USERNAME=iqbal
+        - SPRING_DATASOURCE_PASSWORD=postgres
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  postgresqldb:
+    image: 'postgres:13.1-alpine'
+    container_name: postgresqldb
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=020501

@@ -22,54 +22,54 @@ import java.util.List;
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/api/admin/brands")
 public class BrandController {
-	private final BrandService brandService;
-	
-	@Autowired
-	public BrandController(BrandService brandService) {
-		this.brandService = brandService;
-	}
-	
-	//test
-	@GetMapping
-	@Operation(summary = "get all brand")
-	public List<BrandDtoResponse> getBrands() {
-		return brandService.getBrands();
-	}
-	
-	@PostMapping
-	@Operation(summary = "create new brand")
-	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<BrandDtoResponse> createBrand(@Valid @RequestBody BrandDtoRequest brandDtoRequest) {
-		BrandDtoResponse brandDtoResponse= this.brandService.createBrand(brandDtoRequest);
-		return ResponseEntity.status(HttpStatus.CREATED).body(brandDtoResponse);
-	}
-	
-	@GetMapping("/name")
-	@Operation(summary = "get brand by name")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "found.brand.by.name"),
-			@ApiResponse(responseCode = "404", description = "not.found.brand")
-	})
-	public ResponseEntity<BrandDtoResponse> findBrandByName(@RequestParam String name) {
-		BrandDtoResponse brandDtoResponse = this.brandService.findBrandByName(name);
-		return ResponseEntity.ok().body(brandDtoResponse);
-	}
-	
-	@DeleteMapping("/{id}")
-	@Operation(summary = "delete brand by id")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "delete.success"),
-			@ApiResponse(responseCode = "404", description = "not.found.brand")
-	})
-	public ResponseEntity<String> deleteBrand(@PathVariable long id) {
-		brandService.deleteBrand(id);
-		return ResponseEntity.ok().body("Delete success brand have id " + id);
-	}
-	
-	@PutMapping("/{id}")
-	@Operation(summary = "update brand")
-	public ResponseEntity<BrandDtoResponse> updateBrand(@RequestBody BrandDtoRequest brandDtoRequest, @PathVariable long id) {
-		BrandDtoResponse brandDtoResponse = this.brandService.updateBrand(brandDtoRequest, id);
-		return ResponseEntity.ok().body(brandDtoResponse);
-	}
+    private final BrandService brandService;
+
+    @Autowired
+    public BrandController(BrandService brandService) {
+        this.brandService = brandService;
+    }
+
+    //test
+    @GetMapping
+    @Operation(summary = "get all brand")
+    public ResponseEntity<List<BrandDtoResponse>> getBrands() {
+        return ResponseEntity.ok().body(brandService.getBrands());
+    }
+
+    @PostMapping
+    @Operation(summary = "create new brand")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<BrandDtoResponse> createBrand(@Valid @RequestBody BrandDtoRequest brandDtoRequest) {
+        BrandDtoResponse brandDtoResponse = this.brandService.createBrand(brandDtoRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(brandDtoResponse);
+    }
+
+    @GetMapping("/name")
+    @Operation(summary = "get brand by name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "found.brand.by.name"),
+            @ApiResponse(responseCode = "404", description = "not.found.brand")
+    })
+    public ResponseEntity<BrandDtoResponse> findBrandByName(@RequestParam String name) {
+        BrandDtoResponse brandDtoResponse = this.brandService.findBrandByName(name);
+        return ResponseEntity.ok().body(brandDtoResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "delete brand by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "delete.success"),
+            @ApiResponse(responseCode = "404", description = "not.found.brand")
+    })
+    public ResponseEntity<String> deleteBrand(@PathVariable long id) {
+        brandService.deleteBrand(id);
+        return ResponseEntity.ok().body("Delete success brand have id " + id);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "update brand")
+    public ResponseEntity<BrandDtoResponse> updateBrand(@RequestBody BrandDtoRequest brandDtoRequest, @PathVariable long id) {
+        BrandDtoResponse brandDtoResponse = this.brandService.updateBrand(brandDtoRequest, id);
+        return ResponseEntity.ok().body(brandDtoResponse);
+    }
 }
